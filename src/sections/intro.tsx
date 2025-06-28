@@ -140,7 +140,10 @@ export default function IntroSection() {
               <p className="font-light">
                 Hi, my
                 <br />
-                name is <span className="font-bold">Raffay.</span>
+                name is{" "}
+                <span className="font-bold">
+                  Raffay<span className="text-secondary">.</span>
+                </span>
               </p>
             </motion.div>
             <motion.div

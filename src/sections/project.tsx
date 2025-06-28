@@ -1,3 +1,6 @@
+"use client";
+import SectionHeader from "@/components/sectionHeader";
+
 const projects = [
   {
     title: "E-commerce Platform",
@@ -25,9 +28,10 @@ export default function ProjectsSection() {
     <section id="projects" className="min-h-screen py-24 bg-primary">
       <div className="container px-8 mx-auto">
         <div className="max-w-6xl mx-auto">
-          <h2 className="mb-20 text-4xl font-bold text-center md:text-5xl text-font">
-            Projects
-          </h2>
+          <SectionHeader
+            heading="What I've Built"
+            description="From frontend interfaces to backend logic, I craft projects that are both functional and user-friendly—designed to make an impact."
+          />
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project, index) => (

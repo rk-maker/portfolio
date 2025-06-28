@@ -141,7 +141,7 @@ const Navbar = () => {
               {/* Line animation - now using scaleX for smoother effect */}
               <div className="flex items-center mb-16 ">
                 <motion.div
-                  className="h-0.5 mr-4 w-15 bg-primary-hover"
+                  className="h-1 mr-4 w-20 bg-primary-hover"
                   variants={lineVariants}
                 />
                 <div className="flex space-x-16 ">

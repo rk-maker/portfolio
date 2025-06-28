@@ -1,5 +1,6 @@
 "use client";
 
+import SectionHeader from "@/components/sectionHeader";
 import { useState } from "react";
 
 const experiences = [
@@ -33,9 +34,10 @@ export default function ExperienceSection() {
     <section id="experience" className="min-h-screen py-10 bg-primary">
       <div className="container px-8 mx-auto">
         <div className="max-w-6xl mx-auto">
-          <h2 className="mb-20 text-4xl font-bold md:flex-row md:text-5xl text-font">
-            Experience
-          </h2>
+          <SectionHeader
+            heading="My Journey So Far"
+            description="Building reliable, scalable apps and solving real-world problems with code. I grow by tackling new challenges and learning every step of the way."
+          />
 
           <div className="flex flex-col gap-12 md:flex-row">
             {/* Vertical tabs */}

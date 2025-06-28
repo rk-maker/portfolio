@@ -48,6 +48,51 @@ h6 {
     transparent 8px
   );
 }
+.btn-striped-layered {
+  position: relative;
+  border: 2px solid var(--color-thirdy);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--color-thirdy);
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1; /* border is on top */
+}
+
+/* Background layer (stripes by default) */
+.btn-striped-layered::before {
+  content: "";
+  position: absolute;
+  top: 4px; /* offset down */
+  left: 4px; /* offset right */
+  right: 4px;
+  bottom: 4px;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #aadcec 0,
+    #aadcec 2px,
+    transparent 2px,
+    transparent 8px
+  );
+  border-radius: calc(0.5rem - 4px); /* adjust radius to fit inside */
+  z-index: -1;
+  transition: background-color 0.3s ease, background-image 0.3s ease;
+}
+
+/* Hover state: solid secondary color instead of stripes */
+.btn-striped-layered:hover::before {
+  background-image: none;
+  background-color: var(--color-secondary);
+}
+
+/* Text remains thirdy */
+.btn-striped-layered:hover {
+  color: var(--color-thirdy);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
