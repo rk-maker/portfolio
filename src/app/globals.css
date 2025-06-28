@@ -3,15 +3,24 @@
 
 @theme {
   --color-primary: #f4f9fc;
-  --color-secondary: #aadcec;
-  --color-primary-hover: #3a28a8;
+  --color-secondary: #aee1f5;
+  --color-thirdy: #7f15e9;
+  --color-primary-hover: #7f15e9;
   --color-primary-light: rgba(72, 49, 212, 0.1);
   --color-font: #0f1b61;
 
   --font-dmsans: "DM Sans", "sans-serif";
 }
+:root {
+  --color-primary: #f4f9fc;
+  --color-secondary: #aee1f5;
+  --color-thirdy: #7f15e9;
+  --color-primary-hover: #7f15e9;
+  --color-font: #0f1b61;
+}
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 /* 
 body {
@@ -30,7 +39,15 @@ h6 {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     "Helvetica Neue", Arial, sans-serif;
 } */
-
+.hover-striped-bg {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #aadcec 0,
+    #aadcec 2px,
+    transparent 0px,
+    transparent 8px
+  );
+}
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

@@ -6,9 +6,9 @@ import Navbar from "@/components/navbar";
 
 export default function Home() {
   return (
-    <main className="relative">
-      <div className="fixed inset-0 bg-white sm:p-8 md:p-4">
-        <div className="relative w-full h-full overflow-y-auto bg-primary">
+    <main className="relative overflow-x-hidden">
+      <div className="fixed inset-0 overflow-y-auto bg-white sm:p-8 md:p-4">
+        <div className="relative w-full min-h-full bg-primary">
           <Navbar />
           <IntroSection />
           <ExperienceSection />

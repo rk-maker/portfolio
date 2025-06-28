@@ -30,46 +30,48 @@ export default function ExperienceSection() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section
-      id="experience"
-      className="min-h-screen py-20"
-      style={{ backgroundColor: "#CCF381" }}
-    >
-      <div className="container mx-auto px-8">
-        <h2 className="text-5xl font-bold text-primary mb-16 text-center">
-          Experience
-        </h2>
+    <section id="experience" className="min-h-screen py-10 bg-primary">
+      <div className="container px-8 mx-auto">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="mb-20 text-4xl font-bold md:flex-row md:text-5xl text-font">
+            Experience
+          </h2>
 
-        <div className="flex max-w-4xl mx-auto">
-          {/* Vertical tabs */}
-          <div className="flex flex-col space-y-4 mr-8">
-            {experiences.map((exp, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTab(index)}
-                className={`text-left p-4 border-l-4 transition-all duration-300 ${
-                  activeTab === index
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-gray-300 text-gray-600 hover:border-primary/50"
-                }`}
-              >
-                <div className="font-semibold">{exp.company}</div>
-                <div className="text-sm opacity-75">{exp.period}</div>
-              </button>
-            ))}
-          </div>
+          <div className="flex flex-col gap-12 md:flex-row">
+            {/* Vertical tabs */}
+            <div className="md:w-1/3">
+              <div className="space-y-2">
+                {experiences.map((exp, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveTab(index)}
+                    className={`w-full text-left p-6 transition-all duration-300 border-l-2 ${
+                      activeTab === index
+                        ? "border-thirdy bg-secondary text-font"
+                        : "border-transparent text-font/60 hover:border-thirdy/30 hover:text-font hover-striped-bg"
+                    }`}
+                  >
+                    <div className="text-lg font-semibold">{exp.company}</div>
+                    <div className="mt-1 text-sm text-thirdy">{exp.period}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
 
-          {/* Content */}
-          <div className="flex-1 p-6">
-            <h3 className="text-2xl font-bold text-primary mb-2">
-              {experiences[activeTab].role}
-            </h3>
-            <p className="text-primary/80 mb-4">
-              {experiences[activeTab].period}
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              {experiences[activeTab].description}
-            </p>
+            {/* Content */}
+            <div className="md:w-2/3">
+              <div className="p-8">
+                <h3 className="mb-4 text-2xl font-bold md:text-3xl text-font">
+                  {experiences[activeTab].role}
+                </h3>
+                <p className="mb-6 font-medium text-thirdy">
+                  {experiences[activeTab].period}
+                </p>
+                <p className="text-lg leading-relaxed text-font/80">
+                  {experiences[activeTab].description}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

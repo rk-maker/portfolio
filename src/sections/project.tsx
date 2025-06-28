@@ -22,45 +22,51 @@ const projects = [
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="min-h-screen bg-primary py-20">
-      <div className="container mx-auto px-8">
-        <h2 className="text-5xl font-bold text-secondary mb-16 text-center">
-          Projects
-        </h2>
+    <section id="projects" className="min-h-screen py-24 bg-primary">
+      <div className="container px-8 mx-auto">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="mb-20 text-4xl font-bold text-center md:text-5xl text-font">
+            Projects
+          </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="bg-secondary rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer group"
-            >
-              <div className="h-48 bg-gray-200 overflow-hidden">
-                <img
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className="transition-all duration-300 transform cursor-pointer group hover:-translate-y-2"
+              >
+                <div className="overflow-hidden transition-all duration-300 border bg-white/50 backdrop-blur-sm rounded-2xl border-thirdy/10 hover:border-thirdy/30">
+                  <div className="h-48 overflow-hidden bg-gradient-to-br from-secondary/20 to-thirdy/10">
+                    <img
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
 
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-primary mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-gray-700 mb-4">{project.description}</p>
+                  <div className="p-6">
+                    <h3 className="mb-3 text-xl font-bold text-font">
+                      {project.title}
+                    </h3>
+                    <p className="mb-4 leading-relaxed text-font/70">
+                      {project.description}
+                    </p>
 
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-primary text-secondary text-sm rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-3 py-1 text-xs font-medium rounded-full text-thirdy bg-secondary border-thirdy border-1"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

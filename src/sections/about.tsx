@@ -10,47 +10,51 @@ export default function AboutSection() {
   };
 
   return (
-    <section
-      id="about"
-      className="min-h-screen py-20"
-      style={{ backgroundColor: "#CCF381" }}
-    >
-      <div className="container mx-auto px-8 text-center">
-        <h2 className="text-5xl font-bold text-primary mb-16">About Me</h2>
+    <section id="about" className="min-h-screen py-24 bg-primary">
+      <div className="container px-8 mx-auto">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="mb-12 text-4xl font-bold md:text-5xl text-font">
+            About Me
+          </h2>
 
-        <div className="max-w-3xl mx-auto space-y-8">
-          <p className="text-lg text-gray-700 leading-relaxed">
-            I'm a passionate full-stack developer with expertise in modern web
-            technologies. I love creating efficient, scalable, and user-friendly
-            applications that solve real-world problems.
-          </p>
+          <div className="space-y-12">
+            <p className="max-w-3xl mx-auto text-xl leading-relaxed text-font/80">
+              I'm a passionate full-stack developer with expertise in modern web
+              technologies. I love creating efficient, scalable, and
+              user-friendly applications that solve real-world problems.
+            </p>
 
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-12">
-            <button
-              onClick={handleResumeDownload}
-              className="bg-primary text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors duration-300"
-            >
-              Download Resume
-            </button>
+            <div className="flex flex-col items-center justify-center gap-8 sm:flex-row">
+              <button
+                onClick={handleResumeDownload}
+                className="px-8 py-4 font-semibold transition-colors duration-300 rounded-full bg-thirdy text-primary hover-primary"
+              >
+                Download Resume
+              </button>
 
-            <div className="space-y-2">
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-primary font-semibold">Email:</span>
-                <a
-                  href="mailto:hello@example.com"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  hello@example.com
-                </a>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-primary font-semibold">Phone:</span>
-                <a
-                  href="tel:+1234567890"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  +1 (234) 567-890
-                </a>
+              <div className="flex flex-col gap-6 text-center sm:flex-row sm:text-left">
+                <div>
+                  <span className="text-sm text-font/60">Email</span>
+                  <div>
+                    <a
+                      href="mailto:hello@example.com"
+                      className="transition-colors text-thirdy hover:text-font"
+                    >
+                      hello@example.com
+                    </a>
+                  </div>
+                </div>
+                <div>
+                  <span className="text-sm text-font/60">Phone</span>
+                  <div>
+                    <a
+                      href="tel:+1234567890"
+                      className="transition-colors text-thirdy hover:text-font"
+                    >
+                      +1 (234) 567-890
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

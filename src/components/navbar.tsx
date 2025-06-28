@@ -4,9 +4,10 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
-
+import AnimatedButton from "./secondaryTextButon";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [shouldAnimateExit, setShouldAnimateExit] = useState(true);
 
   const socialIcons = [
     { name: "Twitter", icon: FaTwitter, url: "#" },
@@ -67,7 +68,15 @@ const Navbar = () => {
       },
     },
   };
-
+  const toggleMenu = () => {
+    if (isMenuOpen) {
+      setShouldAnimateExit(false);
+      setIsMenuOpen(false);
+    } else {
+      setShouldAnimateExit(true);
+      setIsMenuOpen(true);
+    }
+  };
   const socialVariants = {
     hidden: {
       x: "100%", // Start off-screen to the right
@@ -105,17 +114,16 @@ const Navbar = () => {
         <div className="flex items-center space-x-2">
           <span className="text-xl">🎨</span>
           <span className="text-font">|</span>
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="font-medium transition-colors hover:text-blue-500"
-          >
-            Menu
-          </button>
+          <AnimatedButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? "CLOSE" : "MENU"}
+          </AnimatedButton>
         </div>
 
-        <span className="flex items-center space-x-1 transition-colors hover:text-blue-500">
-          <span className="text-xl">💬</span>
-          <span>Hire me</span>
+        <span className="flex items-center space-x-1 ">
+          <span className="">💬</span>
+          <AnimatedButton onClick={() => alert("Clicked!")}>
+            HIRE ME
+          </AnimatedButton>
         </span>
       </nav>
 
@@ -126,7 +134,6 @@ const Navbar = () => {
             className="absolute inset-0 z-40 bg-secondary"
             initial="hidden"
             animate="visible"
-            exit="hidden"
             variants={containerVariants}
             style={{ willChange: "height" }} // Performance hint
           >
