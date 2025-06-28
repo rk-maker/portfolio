@@ -1,64 +1,30 @@
 "use client";
 import { SvgComponent } from "../assets/avatarSVG";
-import { motion } from "framer-motion";
-
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.3,
-      when: "beforeChildren",
-    },
-  },
-};
+import { delay, motion } from "framer-motion";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: {
-    opacity: 1,
+  hidden: { y: 20, opacity: 0 },
+  show: (i: number) => ({
     y: 0,
+    opacity: 1,
     transition: {
-      duration: 0.6,
-      ease: "easeOut",
+      delay: i * 0.5, // Each text waits for previous
+      duration: 0.5,
     },
-  },
+  }),
 };
-
-const bounceUp = {
-  hidden: {
-    opacity: 0,
-    y: 100,
-    scaleX: 1,
-    scaleY: 0.5,
-  },
+const strippedGrow = {
+  hidden: { width: 0, opacity: 0 },
   show: {
+    width: "100%",
     opacity: 1,
-    y: 0,
-    scaleX: [1, 0.8, 1.05, 0.95, 1],
-    scaleY: [0.5, 1.2, 0.9, 1.05, 1],
     transition: {
-      delay: 0.6, // Delay after text animations
-      y: {
-        type: "spring",
-        stiffness: 250,
-        damping: 15,
-        mass: 0.7,
-      },
-      scaleX: {
-        duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1],
-        times: [0, 0.4, 0.65, 0.85, 1],
-      },
-      scaleY: {
-        duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1],
-        times: [0, 0.4, 0.65, 0.85, 1],
-      },
+      delay: 3.0, // Now this will work properly
+      width: { duration: 0.5 },
       opacity: { duration: 0.3 },
     },
   },
 };
-
 const grow = {
   hidden: {
     scaleY: 0,
@@ -97,41 +63,68 @@ const waveLetter = {
   }),
 };
 
+const bounceUp = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+    scaleX: 1,
+    scaleY: 0.5,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    scaleX: [1, 0.8, 1.05, 0.95, 1],
+    scaleY: [0.5, 1.2, 0.9, 1.05, 1],
+    transition: {
+      y: {
+        type: "spring",
+        stiffness: 250,
+        damping: 15,
+        mass: 0.7,
+      },
+      scaleX: {
+        duration: 0.8,
+        ease: [0.25, 0.1, 0.25, 1],
+        times: [0, 0.4, 0.65, 0.85, 1],
+      },
+      scaleY: {
+        duration: 0.8,
+        ease: [0.25, 0.1, 0.25, 1],
+        times: [0, 0.4, 0.65, 0.85, 1],
+      },
+      opacity: { duration: 0.3 },
+    },
+  },
+};
+
 export default function IntroSection() {
   return (
-    <section id="intro">
-      <div className="mx-auto w-fit">
-        <motion.div variants={container} initial="hidden" animate="show">
-          {/* Text sections */}
-          <div className="flex items-center justify-center">
-            <div className="">
-              <motion.div variants={fadeUp} className="text-6xl">
-                <p className="font-light">Hi, my</p>
-                <div className="flex">
-                  <p className="font-light">name is {`   `}</p>
-                  <p className="ml-2 font-bold"> Raffay.</p>
-                </div>
-              </motion.div>
-              <motion.div variants={fadeUp} className="text-xl">
-                <p className="font-light">
-                  I'm a <span className="font-bold">Full Stack developer</span>{" "}
-                  from
-                </p>
-                <p className="font-light">Pakistan.</p>
-              </motion.div>
-            </div>
-            <motion.div variants={bounceUp}>
-              <SvgComponent className="w-100 h-100" />
+    <section id="intro" className="">
+      <motion.div className="flex" initial="hidden" animate="show">
+        {/* first mid */}
+        <div className="flex flex-col items-end justify-end w-1/2 ">
+          {/* text area */}
+          <div className="justify-center py-13 z-2">
+            <motion.div variants={fadeUp} custom={0} className="text-8xl">
+              <p className="font-light">
+                Hi, my
+                <br />
+                name is <span className="font-bold">Raffay.</span>
+              </p>
+            </motion.div>
+            <motion.div variants={fadeUp} custom={1} className="text-2xl mt-7">
+              <p className="font-light">
+                I'm a <span className="font-bold">Full Stack developer</span>{" "}
+                from
+              </p>
+              <p className="font-light">Pakistan.</p>
             </motion.div>
           </div>
+          {/* text area */}
 
-          {/* Scroll section */}
-          <div className="inline-flex flex-col items-center mt-8">
-            {/* "SCROLL" word */}
-            <motion.div variants={wordAppear} className="mb-4">
+          <div className="inline-flex flex-col items-center self-center">
+            <motion.div variants={wordAppear} className="mb-2">
               <motion.span
-                initial="hidden"
-                animate="show"
                 className="text-xs tracking-widest"
                 style={{ display: "inline-block" }}
               >
@@ -149,10 +142,9 @@ export default function IntroSection() {
               </motion.span>
             </motion.div>
 
-            {/* Line */}
             <motion.div
               variants={grow}
-              className="relative w-1 h-52"
+              className="relative w-1 h-80"
               style={{ originY: 1 }}
             >
               <motion.div
@@ -161,8 +153,38 @@ export default function IntroSection() {
               />
             </motion.div>
           </div>
-        </motion.div>
-      </div>
+        </div>
+        {/* first mid */}
+
+        {/* second mid */}
+        <div className="relative flex justify-center w-1/2">
+          <div className="relative w-full h-[32.5rem]">
+            {/* Striped background */}
+            <motion.div
+              variants={strippedGrow}
+              className="absolute z-0 w-full -translate-y-1/2 right-30 h-60 top-1/2"
+              style={{
+                backgroundImage: `repeating-linear-gradient(
+          45deg,
+          #aadcec 0,
+          #aadcec 2px,
+          transparent 0px,
+          transparent 8px
+        )`,
+              }}
+            ></motion.div>
+
+            {/* SVG */}
+            <motion.div
+              variants={bounceUp}
+              className="relative z-10 flex justify-center"
+            >
+              <SvgComponent className="w-130 h-130" />
+            </motion.div>
+          </div>
+        </div>
+        {/* second mid */}
+      </motion.div>
     </section>
   );
 }
