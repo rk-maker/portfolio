@@ -10,10 +10,12 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
   const [height, setHeight] = React.useState(0);
   const rawX = useMotionValue(0);
 
-  // NOTE:Track animation frame ID for cleanup
+  // Add delayed motion values for eyebrows and head
+  const delayedRawX = useMotionValue(0);
+  const delayedRawY = useMotionValue(0);
+
   const animationFrameRef = React.useRef<number>(null);
 
-  //NOTE:for constant change in width and height
   useEffect(() => {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
@@ -25,30 +27,35 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const headRotate = useTransform(rawX, [0, width], [2, -2]);
-  //NOTE:here you can resrict or increase the eye movvement
-  const leftBrowY = useTransform(rawX, [0, width], [-50, 20], {});
-  const rightBrowY = useTransform(rawX, [0, width], [20, -50], {});
+  // Apply delay to the rawX for eyebrows and head
+  useEffect(() => {
+    const unsubscribe = rawX.on("change", (latest) => {
+      animate(delayedRawX, latest, { duration: 0.3, ease: "easeOut" });
+    });
+    return () => unsubscribe();
+  }, []);
 
-  //NOTE: Debounced mouse move handler
+  // Use the delayedRawX for eyebrows and head rotation
+  const headRotate = useTransform(delayedRawX, [0, width], [-2, 2]);
+  const leftBrowY = useTransform(delayedRawX, [0, width], [-20, 10]);
+  const rightBrowY = useTransform(delayedRawX, [0, width], [10, -20]);
+
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      //NOTE: Cancel any pending animation frame
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
 
-      //NOTE: Schedule update for next animation frame
       animationFrameRef.current = requestAnimationFrame(() => {
-        const eyeX = (e.clientX - width / 2) / 10;
-        const eyeY = (e.clientY - height / 2) / 10;
+        const eyeX = (e.clientX - width / 2) / 15;
+        const eyeY = (e.clientY - height / 2) / 15;
 
         animate(x, eyeX, {
-          duration: 0.1, //NOTE: Slightly longer duration for smoother motion
+          duration: 0.3,
           ease: "easeOut",
         });
         animate(y, eyeY, {
-          duration: 0.1,
+          duration: 0.3,
           ease: "easeOut",
         });
 
@@ -62,7 +69,6 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
     window.addEventListener("mousemove", handleMouseMove);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      // Clean up any pending animation frame
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
