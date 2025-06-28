@@ -101,7 +101,7 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between bg-blue-300 md:p-10">
+      <nav className="sticky top-0 z-50 flex items-center justify-between md:p-10">
         <div className="flex items-center space-x-2">
           <span className="text-xl">🎨</span>
           <span className="text-font">|</span>
@@ -130,7 +130,7 @@ const Navbar = () => {
             variants={containerVariants}
             style={{ willChange: "height" }} // Performance hint
           >
-            <div className="justify-between max-w-4xl mx-12 pt-26 bg-amber-400">
+            <div className="justify-between max-w-4xl mx-12 pt-26 ">
               {/* Line animation - now using scaleX for smoother effect */}
               <div className="flex items-center mb-16 ">
                 <motion.div

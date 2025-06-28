@@ -1,5 +1,5 @@
 "use client";
-import { SvgComponent } from "../components/avatarSVG";
+import { SvgComponent } from "../assets/avatarSVG";
 import { motion } from "framer-motion";
 
 const container = {
