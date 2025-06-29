@@ -113,84 +113,15 @@ const Navbar = () => {
       <nav className="sticky top-0 z-50 flex items-center justify-between md:p-10">
         <div className="flex items-center space-x-2">
           <span className="text-xl">🎨</span>
-          <span className="text-font">|</span>
-          <AnimatedButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? "CLOSE" : "MENU"}
-          </AnimatedButton>
         </div>
 
         <span className="flex items-center space-x-1 ">
           <span className="">💬</span>
           <AnimatedButton onClick={() => alert("Clicked!")}>
-            HIRE ME
+            ASK ME
           </AnimatedButton>
         </span>
       </nav>
-
-      {/* Fullscreen Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            className="absolute inset-0 z-40 bg-secondary"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-            style={{ willChange: "height" }} // Performance hint
-          >
-            <div className="justify-between max-w-4xl mx-12 pt-26 ">
-              {/* Line animation - now using scaleX for smoother effect */}
-              <div className="flex items-center mb-16 ">
-                <motion.div
-                  className="h-1 mr-4 w-20 bg-primary-hover"
-                  variants={lineVariants}
-                />
-                <div className="flex space-x-16 ">
-                  {socialIcons.map((icon, i) => {
-                    const Icon = icon.icon;
-                    return (
-                      <motion.a
-                        key={icon.name}
-                        href={icon.url}
-                        className="px-3 m-2 text-m"
-                        custom={i}
-                        variants={socialVariants}
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        <Icon />
-                      </motion.a>
-                    );
-                  })}
-                </div>
-              </div>
-              {/* Menu items */}
-              <div className="">
-                {menuItems.map((item, i) => (
-                  <motion.div
-                    key={item.name}
-                    custom={i}
-                    variants={menuItemVariants}
-                    initial="hidden"
-                    animate="visible"
-                  >
-                    <a
-                      href={item.url}
-                      className="flex items-baseline mb-10 group"
-                    >
-                      <span className="block text-5xl font-bold transition-colors w-60 group-hover:text-white ">
-                        {item.name}
-                      </span>
-                      <span className="pl-40 font-light transition-colors text-m group-hover:text-white">
-                        {item.description}
-                      </span>
-                    </a>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 };

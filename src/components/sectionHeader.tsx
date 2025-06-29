@@ -20,8 +20,16 @@ const fadeUp = {
     },
   }),
 };
-
-const SectionHeader = ({ heading, description }) => {
+type SectionHeaderProps = {
+  heading: string;
+  description: string;
+  onAnimationComplete?: () => void;
+};
+const SectionHeader: React.FC<SectionHeaderProps> = ({
+  heading,
+  description,
+  onAnimationComplete,
+}) => {
   const fadeUpControls = useAnimation();
   const linePlaceControls = useAnimation();
   const lineRef = useRef(null);
@@ -30,14 +38,19 @@ const SectionHeader = ({ heading, description }) => {
   React.useEffect(() => {
     if (isInView) {
       async function sequence() {
-        // 1. Animate line arrival
-        await linePlaceControls.start("visible"); // use "visible" to match your variant name
-        // 2. Animate text fadeUp
+        // Animate line
+        await linePlaceControls.start("visible");
+        // Animate text
         await fadeUpControls.start("show");
+        // ✅ Call callback to signal animation finished
+        if (onAnimationComplete) {
+          onAnimationComplete();
+        }
       }
       sequence();
     }
-  }, [isInView, linePlaceControls, fadeUpControls]);
+  }, [isInView, linePlaceControls, fadeUpControls, onAnimationComplete]);
+
   return (
     <section>
       <motion.p
@@ -56,7 +69,7 @@ const SectionHeader = ({ heading, description }) => {
         className="h-1 mr-4 w-20 bg-primary-hover mb-8"
         variants={lineVariants}
         initial="hidden"
-        animate={linePlaceControls} // use controls here instead of isInView ternary
+        animate={linePlaceControls}
       />
 
       <motion.p
