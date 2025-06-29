@@ -57,6 +57,9 @@ const waveLetter = {
     transition: {
       duration: 0.6,
       delay: i * 0.1,
+      repeat: Infinity, // repeat forever
+      repeatDelay: 6, // wait 6 seconds before repeating
+      repeatType: "loop",
     },
   }),
 };
@@ -124,7 +127,7 @@ export default function IntroSection() {
   }, []);
 
   return (
-    <section id="intro" className="">
+    <section id="intro" className="mb-20">
       <div className="flex">
         {/* first mid */}
         <div className="flex flex-col items-end justify-end w-1/2 ">
@@ -193,7 +196,7 @@ export default function IntroSection() {
               variants={grow}
               initial="hidden"
               animate={growControls}
-              className="relative w-1 h-80"
+              className="relative w-1 h-60"
               style={{ originY: 1 }}
             >
               <motion.div

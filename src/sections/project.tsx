@@ -30,7 +30,10 @@ import SectionHeader from "@/components/sectionHeader";
 // ];
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="h-screen w-full bg-primary">
+    <section
+      id="projects"
+      className="h-screen w-full bg-primary items-center justify-center flex flex-col"
+    >
       <div className="container px-8 mx-auto">
         <div className="max-w-6xl mx-auto">
           <SectionHeader

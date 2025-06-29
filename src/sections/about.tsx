@@ -49,7 +49,10 @@ export default function AboutSection() {
   };
 
   return (
-    <section id="about" className="h-screen w-full bg-primary">
+    <section
+      id="about"
+      className="h-screen w-full  justify-center items-center flex flex-col"
+    >
       <div className="container  px-8 mx-auto">
         <div className="max-w-6xl mx-auto">
           <SectionHeader

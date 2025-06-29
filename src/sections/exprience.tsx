@@ -73,8 +73,8 @@ export default function ExperienceSection() {
     sequence();
   }, [prevAnimation, expiereunceTabsControl]);
   return (
-    <section id="experience" className="h-screen w-full bg-primary">
-      <div className="container px-8 mx-auto">
+    <section id="experience" className=" w-full bg-primary ">
+      <div className="container px-10 mx-auto ">
         <div className="max-w-6xl mx-auto">
           <SectionHeader
             heading="My Journey So Far"
@@ -84,10 +84,10 @@ export default function ExperienceSection() {
             }}
           />
 
-          <div className="flex flex-col gap-12 md:flex-row">
+          <div className="flex flex-col gap-12 md:flex-row ">
             {/* Vertical tabs */}
             <div className="md:w-1/3">
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {experiences.map((exp, index) => (
                   <motion.button
                     variants={epxerienceTabs}

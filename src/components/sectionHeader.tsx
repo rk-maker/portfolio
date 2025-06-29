@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import React from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const lineVariants = {
   hidden: { x: "600px", opacity: 0 },
@@ -9,47 +10,52 @@ const lineVariants = {
     transition: { delay: 0.3, duration: 0.5, ease: [0.8, 0, 0.2, 1] },
   },
 };
+
 const fadeUp = {
   hidden: { y: 20, opacity: 0 },
   show: (i: number) => ({
     y: 0,
     opacity: 1,
     transition: {
-      delay: i * 0.5, // each line stagger
+      delay: i * 0.5, // stagger animation for each item
       duration: 0.5,
     },
   }),
 };
+
 type SectionHeaderProps = {
   heading: string;
   description: string;
   onAnimationComplete?: () => void;
 };
+
 const SectionHeader: React.FC<SectionHeaderProps> = ({
   heading,
   description,
   onAnimationComplete,
 }) => {
+  // Create animation controls
   const fadeUpControls = useAnimation();
   const linePlaceControls = useAnimation();
-  const lineRef = useRef(null);
-  const isInView = useInView(lineRef, { once: true });
+
+  // Use react-intersection-observer to track visibility with threshold 0.5
+  const [lineRef, inView] = useInView({
+    threshold: 0.7, // triggers when 50% visible
+    triggerOnce: true, // animate only once
+  });
 
   React.useEffect(() => {
-    if (isInView) {
+    if (inView) {
       async function sequence() {
-        // Animate line
         await linePlaceControls.start("visible");
-        // Animate text
         await fadeUpControls.start("show");
-        // ✅ Call callback to signal animation finished
         if (onAnimationComplete) {
           onAnimationComplete();
         }
       }
       sequence();
     }
-  }, [isInView, linePlaceControls, fadeUpControls, onAnimationComplete]);
+  }, [inView, linePlaceControls, fadeUpControls, onAnimationComplete]);
 
   return (
     <section>
