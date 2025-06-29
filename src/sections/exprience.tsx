@@ -2,7 +2,7 @@
 
 import SectionHeader from "@/components/sectionHeader";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 
 const experiences = [
   {

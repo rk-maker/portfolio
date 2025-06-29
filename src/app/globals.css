@@ -100,3 +100,30 @@ h6 {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.icon-custom {
+  position: relative;
+  display: inline-block;
+  /* You can set icon size here if needed */
+}
+
+.icon-custom svg {
+  position: relative;
+  z-index: 2;
+  stroke-width: 2; /* Makes the outline bolder */
+  stroke: var(
+    --color-thirdy
+  ); /* fallback; will override below using Tailwind classes if needed */
+}
+
+.icon-custom::before {
+  content: "";
+  position: absolute;
+  top: 4px; /* Adjust this for offset down */
+  left: 4px; /* Adjust this for offset right */
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-secondary); /* fallback */
+  z-index: 1;
+  border-radius: 4px; /* Optional: if you want rounded corners behind */
+}
