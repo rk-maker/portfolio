@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import AnimatedButton from "./secondaryTextButon";
-import { IoChatbubbleOutline } from "react-icons/io5";
+import StackedIcon from "./shadowIcon";
+import { IoChatbubbleOutline, IoChatbubbleSharp } from "react-icons/io5";
 
 const Navbar = () => {
   return (
@@ -17,9 +18,13 @@ const Navbar = () => {
         </div>
 
         <span className="flex items-center space-x-1 ">
-          <a className="icon-custom">
-            <IoChatbubbleOutline />
-          </a>
+          <StackedIcon
+            OutlineIcon={IoChatbubbleOutline}
+            FilledIcon={IoChatbubbleSharp}
+            offset={4}
+            size={32}
+          />
+
           <AnimatedButton onClick={() => alert("Clicked!")}>
             ASK ME
           </AnimatedButton>
