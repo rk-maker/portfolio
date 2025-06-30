@@ -6,15 +6,15 @@ import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import AnimatedButton from "./secondaryTextButon";
 import StackedIcon from "./shadowIcon";
-import { IoChatbubbleOutline, IoChatbubbleSharp } from "react-icons/io5";
 
+import { IoChatbubbleOutline, IoChatbubbleSharp } from "react-icons/io5";
 const Navbar = () => {
   return (
     <>
       {/* Main Navbar */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between md:p-10">
+      <nav className="absolute top-0 z-50 flex items-center justify-between md:p-10 w-full">
         <div className="flex items-center space-x-2">
-          <IoChatbubbleOutline />
+          <img src={"./logo.png"} className="w-12 h-12" />
         </div>
 
         <span className="flex items-center space-x-1 ">

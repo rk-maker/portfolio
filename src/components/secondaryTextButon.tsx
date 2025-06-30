@@ -14,7 +14,7 @@ export default function AnimatedButton({
   return (
     <button
       onClick={onClick}
-      className={`text-sm tracking-[7px] transition-all hover:tracking-[12px] ease-in-out duration-200 cursor-pointer px-4 py-2  rounded ${className}`}
+      className={`text-sm tracking-[5px] transition-all hover:tracking-[12px] ease-in-out duration-200 cursor-pointer px-4 py-2  rounded ${className}`}
     >
       {children}
     </button>

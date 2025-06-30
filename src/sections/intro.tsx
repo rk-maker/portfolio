@@ -128,7 +128,7 @@ export default function IntroSection() {
 
   return (
     <section id="intro" className="mb-20">
-      <div className="flex">
+      <div className="flex pt-20">
         {/* first mid */}
         <div className="flex flex-col items-end justify-end w-1/2 ">
           {/* text area */}
@@ -165,7 +165,7 @@ export default function IntroSection() {
           </div>
           {/* text area */}
 
-          <div className="inline-flex flex-col items-center self-center">
+          <div className="inline-flex flex-col items-center self-center pt-10">
             <motion.div
               variants={wordAppear}
               initial="hidden"
@@ -196,7 +196,7 @@ export default function IntroSection() {
               variants={grow}
               initial="hidden"
               animate={growControls}
-              className="relative w-1 h-60"
+              className="relative w-1 h-40"
               style={{ originY: 1 }}
             >
               <motion.div
