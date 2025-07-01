@@ -30,14 +30,14 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
   // Apply delay to the rawX for eyebrows and head
   useEffect(() => {
     const unsubscribe = rawX.on("change", (latest) => {
-      animate(delayedRawX, latest, { duration: 0.3, ease: "easeOut" });
+      animate(delayedRawX, latest, { duration: 0.2, ease: "easeOut" });
     });
     return () => unsubscribe();
   }, []);
 
   // Use the delayedRawX for eyebrows and head rotation
   const headRotate = useTransform(delayedRawX, [0, width], [-2, 2]);
-  const leftBrowY = useTransform(delayedRawX, [0, width], [-20, 10]);
+  const leftBrowY = useTransform(delayedRawX, [0, width], [-30, 30]);
   const rightBrowY = useTransform(delayedRawX, [0, width], [10, -20]);
 
   const handleMouseMove = useCallback(
@@ -47,15 +47,16 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
       }
 
       animationFrameRef.current = requestAnimationFrame(() => {
+        //area of eyes to react high number  you divide more restrict it will be
         const eyeX = (e.clientX - width / 2) / 15;
         const eyeY = (e.clientY - height / 2) / 15;
-
+        //reaction of eyes
         animate(x, eyeX, {
-          duration: 0.3,
+          duration: 0.1,
           ease: "easeOut",
         });
         animate(y, eyeY, {
-          duration: 0.3,
+          duration: 0.1,
           ease: "easeOut",
         });
 
@@ -142,7 +143,7 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
       </g>
       <motion.g
         id="head_1_"
-        style={{ rotate: headRotate, originX: 0.5, originY: 0.5 }}
+        style={{ rotate: headRotate, originX: 0.5, originY: 1 }}
       >
         <polygon
           className="st1"
