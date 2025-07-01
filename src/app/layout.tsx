@@ -14,6 +14,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Raffay",
   description: "Raffay khan portfolio",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({

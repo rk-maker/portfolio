@@ -6,25 +6,25 @@ import { motion, useAnimation } from "framer-motion";
 
 const experiences = [
   {
-    company: "Tech Corp",
-    role: "Senior Full Stack Developer",
-    period: "2022 - Present",
-    description:
-      "Led development of scalable web applications using React, Node.js, and cloud technologies.",
-  },
-  {
-    company: "StartupXYZ",
+    company: "Senior Software Engineer",
     role: "Full Stack Developer",
-    period: "2020 - 2022",
+    period: "Jan 2023 - Oct 2024",
     description:
-      "Built and maintained multiple client projects using modern web technologies.",
+      "Led high-performance, SEO-friendly web and full-stack apps using advanced NLP models, optimized Node.js backends, and robust CI/CD. Achieved 1M+ downloads and a 4.5★ rating for the NBP app.",
   },
   {
-    company: "Digital Agency",
-    role: "Frontend Developer",
-    period: "2019 - 2020",
+    company: "Software Engineer",
+    role: "Full Stack Developer",
+    period: "Jan 2021 - Jan 2023",
     description:
-      "Developed responsive websites and web applications with focus on user experience.",
+      "Architected scalable, secure Node.js backends handling millions of requests, boosting performance by 40%. Delivered robust, production-ready systems with optimized React UIs (framer-motion, shadcn, MUI), strong state management, and comprehensive testing. Automated deployments, reducing release time by 50%.",
+  },
+  {
+    company: "Internship",
+    role: "Frontend Developer",
+    period: "Oct 2020 - Dec 2020",
+    description:
+      "Built an e-commerce app with efficient state management, optimized web performance, and ensured smooth, reliable releases.",
   },
 ];
 const epxerienceTabs = {
