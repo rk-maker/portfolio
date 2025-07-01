@@ -6,16 +6,26 @@ import Navbar from "@/components/navbar";
 
 export default function Home() {
   return (
-    <main className="relative overflow-x-hidden">
-      <div className="fixed inset-0 overflow-y-auto bg-white sm:p-8 md:p-4">
-        <div className="relative w-full min-h-full bg-primary">
+    <>
+      {/* Universal border */}
+      <div className="fixed inset-0 border-[20px] border-white pointer-events-none z-50"></div>
+
+      {/* Outer white background container */}
+      <div
+        style={{
+          background: "white",
+          padding: "20px",
+          minHeight: "100vh",
+        }}
+      >
+        <main className="relative">
           <Navbar />
           <IntroSection />
           <ExperienceSection />
           <ProjectsSection />
           <AboutSection />
-        </div>
+        </main>
       </div>
-    </main>
+    </>
   );
 }

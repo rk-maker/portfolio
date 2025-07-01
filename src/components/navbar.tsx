@@ -1,36 +1,40 @@
 "use client";
-import { useState } from "react";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
-import { IoMdMail } from "react-icons/io";
+
+import { motion } from "framer-motion";
 import AnimatedButton from "./secondaryTextButon";
 import StackedIcon from "./shadowIcon";
-
 import { IoChatbubbleOutline, IoChatbubbleSharp } from "react-icons/io5";
+
 const Navbar = () => {
   return (
-    <>
-      {/* Main Navbar */}
-      <nav className="absolute top-0 z-50 flex items-center justify-between md:p-10 w-full">
-        <div className="flex items-center space-x-2">
-          <img src={"./logo.png"} className="w-12 h-12" />
-        </div>
+    <nav
+      className="fixed z-10 flex items-center justify-between left-0 right-0 mx-auto px-10 py-8"
+      style={{ width: "calc(100% - 40px)" }}
+    >
+      <div className="flex">
+        <motion.div
+          whileHover={{
+            scale: 1.1,
+            rotate: [0, 10, -10, 0], // small wiggle effect
+            transition: { duration: 0.5 },
+          }}
+        >
+          <img src={"./logo.png"} className="w-15 h-15" />
+        </motion.div>
+      </div>
 
-        <span className="flex items-center space-x-1 ">
-          <StackedIcon
-            OutlineIcon={IoChatbubbleOutline}
-            FilledIcon={IoChatbubbleSharp}
-            offset={4}
-            size={32}
-          />
-
-          <AnimatedButton onClick={() => alert("Clicked!")}>
-            ASK ME
-          </AnimatedButton>
-        </span>
-      </nav>
-    </>
+      <span className="flex">
+        <StackedIcon
+          OutlineIcon={IoChatbubbleOutline}
+          FilledIcon={IoChatbubbleSharp}
+          offset={4}
+          size={32}
+        />
+        <AnimatedButton onClick={() => alert("Clicked!")}>
+          ASK ME
+        </AnimatedButton>
+      </span>
+    </nav>
   );
 };
 

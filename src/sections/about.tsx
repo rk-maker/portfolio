@@ -69,7 +69,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="h-screen w-full justify-center items-center flex flex-col"
+      className="h-screen w-full justify-center items-center flex flex-col bg-primary"
     >
       <div className="container px-8 mx-auto">
         <div className="max-w-6xl mx-auto">
