@@ -89,9 +89,7 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
       x="0px"
       y="0px"
       viewBox="420 -829.6 1800.9 2219.6"
-      style={{
-        enableBackground: "new 420 -829.6 1800.9 2219.6",
-      }}
+      style={{}}
       xmlSpace="preserve"
       {...props}
     >
@@ -261,20 +259,19 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
         <motion.g id="mouth">
           <motion.path
             className="st8"
-            d="M1502.5,348.3c-118.4,54.3-260.7,51.5-377.8-5.6c-10.1-4.9-28.2-21.7-5.5-17.5c14.6,2.7,29.2,8.5,43.7,12 c62.9,15,128.1,22.5,192.8,19.8c44-1.8,88-8.6,130-21.9c5.7-1.8,38.5-17.8,39.9-8.6C1526.5,332.2,1507.3,346,1502.5,348.3z"
+            // Remove static d — it will be animated below
+            d={useTransform(
+              rawX,
+              [0, width],
+              [
+                // Left position - left side smirks
+                "M1502.5,348.3c-118.4,54.3-260.7,51.5-377.8-5.6c-10.1-4.9-28.2-21.7-5.5-17.5c14.6,2.7,29.2,8.5,43.7,12 c62.9,15,128.1,22.5,192.8,19.8c44-1.8,88-8.6,130-21.9c5.7-1.8,38.5-17.8,39.9-8.6C1526.5,332.2,1507.3,346,1502.5,348.3z",
+                // Right position - right side smirks
+                "M1502.5,348.3c-118.4,54.3-260.7,51.5-377.8-5.6c-10.1-4.9-18.2-11.7-5.5-17.5c14.6,2.7,29.2,8.5,43.7,12 c62.9,15,128.1,22.5,192.8,19.8c44-1.8,88-8.6,130-21.9c5.7-1.8,48.5-7.8,39.9-8.6C1526.5,332.2,1507.3,346,1502.5,348.3z",
+              ]
+            )}
             style={{
-              // Animate path data based on cursor position
-              d: useTransform(
-                rawX,
-                [0, width],
-                [
-                  // Left position - left side smirks
-                  "M1502.5,348.3c-118.4,54.3-260.7,51.5-377.8-5.6c-10.1-4.9-28.2-21.7-5.5-17.5c14.6,2.7,29.2,8.5,43.7,12 c62.9,15,128.1,22.5,192.8,19.8c44-1.8,88-8.6,130-21.9c5.7-1.8,38.5-17.8,39.9-8.6C1526.5,332.2,1507.3,346,1502.5,348.3z",
-                  // Right position - right side smirks
-                  "M1502.5,348.3c-118.4,54.3-260.7,51.5-377.8-5.6c-10.1-4.9-18.2-11.7-5.5-17.5c14.6,2.7,29.2,8.5,43.7,12 c62.9,15,128.1,22.5,192.8,19.8c44-1.8,88-8.6,130-21.9c5.7-1.8,48.5-7.8,39.9-8.6C1526.5,332.2,1507.3,346,1502.5,348.3z",
-                ]
-              ),
-              // Optional: Add slight rotation for more expression
+              // Only CSS properties here
               rotate: useTransform(rawX, [0, width], [2, -2]),
             }}
           />

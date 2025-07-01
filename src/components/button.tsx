@@ -1,4 +1,11 @@
-export default function ShadowButton({ children, onClick }) {
+import React, { ReactNode, MouseEventHandler } from "react";
+
+type ShadowButtonProps = {
+  children: ReactNode;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+};
+
+export default function ShadowButton({ children, onClick }: ShadowButtonProps) {
   return (
     <div className="relative inline-block group">
       {/* Background layer */}

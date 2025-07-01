@@ -15,8 +15,8 @@ const Navbar = () => {
         <motion.div
           whileHover={{
             scale: 1.1,
-            rotate: [0, 10, -10, 0], // small wiggle effect
-            transition: { duration: 0.5 },
+
+            transition: { duration: 0.2 },
           }}
         >
           <img src={"./logo.png"} className="w-15 h-15" />
