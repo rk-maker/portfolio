@@ -138,10 +138,13 @@ export default function IntroSection() {
 
   return (
     <section id="intro" className="bg-primary" ref={containerRef}>
-      <div className="flex pt-20">
+      <div className="flex flex-col md:flex-row pt-20">
         {/* first mid */}
-        <motion.div className="w-1/2  relative z-1" style={{ y: leftColumnY }}>
-          <div className="z-5 flex flex-col items-end justify-end">
+        <motion.div
+          className="md:w-1/2 w-full relative z-1 order-2 md:order-1"
+          style={{ y: leftColumnY }}
+        >
+          <div className="z-5 flex flex-col md:items-end md:justify-end justify-center md:text-start text-center self-center">
             {/* text area */}
             <div className="justify-center py-13">
               <motion.div
@@ -221,14 +224,17 @@ export default function IntroSection() {
         {/* first mid */}
 
         {/* second mid */}
-        <motion.div className="relative  w-1/2" style={{ y: rightColumnY }}>
-          <div className="flex justify-center">
+        <motion.div
+          className="relative   md:w-1/2 order-1 md:order-2  w-3/4 md:self-start self-center "
+          style={{ y: rightColumnY }}
+        >
+          <div className="flex md:justify-end justify-center ">
             {/* Striped background */}
             <motion.div
               variants={strippedGrow}
               initial="hidden"
               animate={strippedGrowControls}
-              className="absolute w-full -translate-y-2/3 right-40 h-60 top-1/2"
+              className="absolute md:h-60 h-30 md:self-center md:right-40"
               style={{
                 y: imageY,
                 backgroundImage: `repeating-linear-gradient(
@@ -240,15 +246,14 @@ export default function IntroSection() {
         )`,
               }}
             ></motion.div>
-
             {/* SVG */}
             <motion.div
               variants={bounceUp}
               initial="hidden"
               animate={bounceUpControls}
-              className="relative z-1 right-20"
+              className="relative z-1 md:right-60"
             >
-              <SvgComponent className="w-130 h-130" />
+              <SvgComponent className="w-60 h-60 md:w-135 md:h-135" />
             </motion.div>
           </div>
         </motion.div>
