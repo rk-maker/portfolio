@@ -61,9 +61,12 @@ export default function AboutSection() {
 
   const handleResumeDownload = () => {
     const link = document.createElement("a");
-    link.href = "/placeholder.pdf";
+    link.href =
+      "https://drive.google.com/uc?export=download&id=1MoixaiihdrGbjAh9biVJhsbKtfZ6IJre";
     link.download = "resume.pdf";
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
   return (
