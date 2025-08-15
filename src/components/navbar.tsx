@@ -20,7 +20,13 @@ const Navbar = () => {
             transition: { duration: 0.2 },
           }}
         >
-          <Image src={"./logo.png"} alt="my-image" className="w-15 h-15" />
+          <Image
+            src={"/logo.png"}
+            alt="my-image"
+            className="w-15 h-15"
+            width={60}
+            height={60}
+          />
         </motion.div>
       </div>
 
