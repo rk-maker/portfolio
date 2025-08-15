@@ -7,9 +7,13 @@ import { IoMdMail } from "react-icons/io";
 import { motion, useAnimation, Variants } from "framer-motion";
 
 const socialIcons = [
-  { name: "Twitter", icon: FaTwitter, url: "#" },
-  { name: "GitHub", icon: FaGithub, url: "#" },
-  { name: "LinkedIn", icon: FaLinkedin, url: "#" },
+  { name: "Twitter", icon: FaTwitter, url: "https://x.com/Rk_raffay" },
+  { name: "GitHub", icon: FaGithub, url: "https://github.com/rk-maker" },
+  {
+    name: "LinkedIn",
+    icon: FaLinkedin,
+    url: "https://www.linkedin.com/in/muhammad-raffay-khan-58b3ba177/",
+  },
   { name: "Mail", icon: IoMdMail, url: "#" },
 ];
 
@@ -86,10 +90,14 @@ export default function AboutSection() {
           <div className="flex ">
             {socialIcons.map((icon, i) => {
               const Icon = icon.icon;
+              const isEmail = icon.name === "Mail";
+
               return (
                 <motion.a
                   key={icon.name}
-                  href={icon.url}
+                  href={isEmail ? `mailto:${icon.url}` : icon.url}
+                  target={isEmail ? undefined : "_blank"} // add this line
+                  rel={isEmail ? undefined : "noopener noreferrer"}
                   className="mr-15 text-lg text-font hover:text-thirdy transition-colors duration-300"
                   custom={i}
                   variants={socialVariants}

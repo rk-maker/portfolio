@@ -184,7 +184,7 @@ export default function IntroSection() {
                 className="text-2xl mt-7"
               >
                 <p className="font-light">
-                  {`I'm a`}
+                  {`I'm a `}
                   <span className="font-bold">Full Stack developer</span>
                   from
                 </p>

@@ -37,7 +37,11 @@ const Navbar = () => {
           offset={4}
           size={32}
         />
-        <AnimatedButton onClick={() => alert("Clicked!")}>
+        <AnimatedButton
+          onClick={() => {
+            window.location.href = "mailto:m.raffaykhan@outlook.com";
+          }}
+        >
           ASK ME
         </AnimatedButton>
       </span>
