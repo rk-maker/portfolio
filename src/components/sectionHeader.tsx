@@ -1,8 +1,8 @@
 import React from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-const lineVariants = {
+const lineVariants: Variants = {
   hidden: { x: "600px", opacity: 0 },
   visible: {
     x: "0%",

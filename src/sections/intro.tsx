@@ -1,7 +1,13 @@
 "use client";
 import { SvgComponent } from "../assets/avatarSVG";
 import { useEffect, useRef } from "react";
-import { motion, useAnimation, useTransform, useScroll } from "framer-motion";
+import {
+  motion,
+  useAnimation,
+  useTransform,
+  useScroll,
+  Variants,
+} from "framer-motion";
 
 const fadeUp = {
   hidden: { y: 20, opacity: 0 },
@@ -27,7 +33,7 @@ const strippedGrow = {
   },
 };
 
-const grow = {
+const grow: Variants = {
   hidden: { scaleY: 0 },
   show: {
     scaleY: 1,
@@ -38,7 +44,7 @@ const grow = {
   },
 };
 
-const wordAppear = {
+const wordAppear: Variants = {
   hidden: { opacity: 0, filter: "blur(5px)" },
   show: {
     opacity: 1,
@@ -50,7 +56,7 @@ const wordAppear = {
   },
 };
 
-const waveLetter = {
+const waveLetter: Variants = {
   hidden: { y: 0, opacity: 1 },
   show: (i: number) => ({
     y: [0, -10, 0],
@@ -64,7 +70,7 @@ const waveLetter = {
   }),
 };
 
-const bounceUp = {
+const bounceUp: Variants = {
   hidden: {
     opacity: 0,
     y: 100,
@@ -134,7 +140,14 @@ export default function IntroSection() {
       await waveLetterControls.start("show");
     }
     sequence();
-  }, []);
+  }, [
+    fadeUpControls,
+    strippedGrowControls,
+    bounceUpControls,
+    growControls,
+    wordAppearControls,
+    waveLetterControls,
+  ]);
 
   return (
     <section id="intro" className="bg-primary" ref={containerRef}>
@@ -171,7 +184,8 @@ export default function IntroSection() {
                 className="text-2xl mt-7"
               >
                 <p className="font-light">
-                  I'm a <span className="font-bold">Full Stack developer</span>{" "}
+                  {`I'm a`}
+                  <span className="font-bold">Full Stack developer</span>
                   from
                 </p>
                 <p className="font-light">Pakistan.</p>

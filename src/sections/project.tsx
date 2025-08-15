@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import SectionHeader from "@/components/sectionHeader";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 
 // const projects = [
 //   {
@@ -33,7 +33,7 @@ import { motion, useAnimation } from "framer-motion";
 export default function ProjectsSection() {
   const [prevAnimation, setPrevAnimation] = useState(false);
   const projectElementsAnimationControls = useAnimation();
-  const projectElementsAnimation = {
+  const projectElementsAnimation: Variants = {
     hidden: {
       y: "100%", // Start off-screen to the right
       opacity: 0,

@@ -33,13 +33,13 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
       animate(delayedRawX, latest, { duration: 0.3, ease: "easeOut" });
     });
     return () => unsubscribe();
-  }, []);
+  }, [rawX, delayedRawX]);
   useEffect(() => {
     const unsubscribe = rawX.on("change", (latest) => {
       animate(delayedHeadRaw, latest, { duration: 0.4, ease: "easeOut" });
     });
     return () => unsubscribe();
-  }, []);
+  }, [rawX, delayedHeadRaw]);
 
   // Use the delayedRawX for eyebrows and head rotation
   const headRotate = useTransform(delayedHeadRaw, [0, width], [-4, 4]);
@@ -69,7 +69,7 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
         rawX.set(e.clientX);
       });
     },
-    [width, height]
+    [width, height, rawX, y, x]
   );
 
   useEffect(() => {

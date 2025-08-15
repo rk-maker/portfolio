@@ -2,7 +2,7 @@
 
 import SectionHeader from "@/components/sectionHeader";
 import { useState, useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 
 const experiences = [
   {
@@ -27,7 +27,7 @@ const experiences = [
       "Built an e-commerce app with efficient state management, optimized web performance, and ensured smooth, reliable releases.",
   },
 ];
-const epxerienceTabs = {
+const epxerienceTabs: Variants = {
   hidden: {
     y: "100%", // Start off-screen to the right
     opacity: 0,
@@ -42,7 +42,7 @@ const epxerienceTabs = {
     },
   }),
 };
-const epxerienceTabsDesc = {
+const epxerienceTabsDesc: Variants = {
   hidden: {
     y: "100%", // Start off-screen to the right
     opacity: 0,
@@ -71,7 +71,7 @@ export default function ExperienceSection() {
       }
     }
     sequence();
-  }, [prevAnimation, expiereunceTabsControl]);
+  }, [prevAnimation, expiereunceTabsControl, expiereunceTabsDescControl]);
   return (
     <section id="experience" className=" w-full bg-primary ">
       <div className="container px-10 mx-auto ">

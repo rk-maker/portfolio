@@ -4,7 +4,7 @@ import StripedButton from "@/components/button";
 import SectionHeader from "@/components/sectionHeader";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 
 const socialIcons = [
   { name: "Twitter", icon: FaTwitter, url: "#" },
@@ -13,7 +13,7 @@ const socialIcons = [
   { name: "Mail", icon: IoMdMail, url: "#" },
 ];
 
-const socialVariants = {
+const socialVariants: Variants = {
   hidden: {
     x: "100%",
     opacity: 0,
@@ -33,7 +33,7 @@ export default function AboutSection() {
   const [prevAnimation, setPrevAnimation] = useState(false);
   const socialIconsControls = useAnimation();
   const aboutElementsAnimationControls = useAnimation();
-  const aboutElementsAnimation = {
+  const aboutElementsAnimation: Variants = {
     hidden: {
       y: "100%",
       opacity: 0,
@@ -57,7 +57,7 @@ export default function AboutSection() {
       }
     }
     sequence();
-  }, [prevAnimation, socialIconsControls]);
+  }, [prevAnimation, socialIconsControls, aboutElementsAnimationControls]);
 
   const handleResumeDownload = () => {
     const link = document.createElement("a");

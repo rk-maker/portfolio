@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import AnimatedButton from "./secondaryTextButon";
 import StackedIcon from "./shadowIcon";
 import { IoChatbubbleOutline, IoChatbubbleSharp } from "react-icons/io5";
+import Image from "next/image";
 
 const Navbar = () => {
   return (
@@ -19,7 +20,7 @@ const Navbar = () => {
             transition: { duration: 0.2 },
           }}
         >
-          <img src={"./logo.png"} className="w-15 h-15" />
+          <Image src={"./logo.png"} alt="my-image" className="w-15 h-15" />
         </motion.div>
       </div>
 
