@@ -165,7 +165,7 @@ export default function IntroSection() {
                 custom={0}
                 initial="hidden"
                 animate={fadeUpControls}
-                className="text-8xl"
+                className="text-6xl md:text-8xl"
               >
                 <p className="font-light">
                   Hi, my
@@ -239,7 +239,7 @@ export default function IntroSection() {
 
         {/* second mid */}
         <motion.div
-          className="relative   md:w-1/2 order-1 md:order-2  w-3/4 md:self-start self-center "
+          className="relative md:w-1/2 order-1 md:order-2  w-3/4 md:self-start self-center "
           style={{ y: rightColumnY }}
         >
           <div className="flex md:justify-end justify-center ">

@@ -1,11 +1,14 @@
 import React, { ReactNode, MouseEventHandler } from "react";
 
-type ShadowButtonProps = {
+type StripedButtonProps = {
   children: ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-export default function ShadowButton({ children, onClick }: ShadowButtonProps) {
+export default function StripedButton({
+  children,
+  onClick,
+}: StripedButtonProps) {
   return (
     <div className="relative inline-block group">
       {/* Background layer */}

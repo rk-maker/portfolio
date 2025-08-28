@@ -48,6 +48,10 @@ h6 {
     transparent 8px
   );
 }
+.dotted-bg {
+  background-image: radial-gradient(#aadcec 1.5px, transparent 1.5px);
+  background-size: 7px 7px; /* space between dots */
+}
 .btn-striped-layered {
   position: relative;
   border: 2px solid var(--color-thirdy);
