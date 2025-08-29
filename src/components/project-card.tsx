@@ -49,16 +49,40 @@ export function ProjectCard({
     <div className={`py-16 ${className}`}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Project Title with underline accent */}
-        <div className="mb-12">
-          <h3 className="text-4xl md:text-5xl font-bold text-[#0f1b61] mb-4">
-            {title}
-          </h3>
-          <div className="w-16 h-1 bg-[#7f15e9]"></div>
-        </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Content Section */}
+        <div className="grid md:grid-cols-2 gap-12  ">
+          {/* Media Section */}
+          <div className="flex items-center justify-center ">
+            {media.type === "video" ? (
+              <iframe
+                width={560}
+                height={315}
+                src={`https://www.youtube.com/watch?v=wmde-jlQ5bY`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="rounded-lg"
+              ></iframe>
+            ) : (
+              <div className="relative w-full">
+                <img
+                  src={photos[currentPhotoIndex] || "/placeholder.svg"}
+                  alt={media.alt || `${title} - Image ${currentPhotoIndex + 1}`}
+                  className="w-full h-auto rounded-lg shadow-lg max-h-96 object-cover transition-all duration-300 animate-in fade-in-0"
+                />
+              </div>
+            )}
+          </div>
+
+          {/*CONTENT sECTION*/}
+
           <div className="space-y-8">
+            <div className="">
+              <h3 className="text-4xl md:text-5xl font-bold text-[#0f1b61] mb-4">
+                {title}
+              </h3>
+            </div>
             {/* Technology Tags */}
             <div className="flex flex-wrap gap-3">
               {technologies.map((tech, index) => (
@@ -83,62 +107,6 @@ export function ProjectCard({
               <StripedButton onClick={() => setIsExpanded(!isExpanded)}>
                 {isExpanded ? `Less Details  ^` : `More Details  >`}
               </StripedButton>
-            )}
-          </div>
-
-          {/* Media Section */}
-          <div className="flex items-center justify-center relative">
-            {media.type === "video" ? (
-              <iframe
-                width={560}
-                height={315}
-                src={`https://www.youtube.com/watch?v=wmde-jlQ5bY`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            ) : (
-              <div className="relative w-full">
-                <img
-                  src={photos[currentPhotoIndex] || "/placeholder.svg"}
-                  alt={media.alt || `${title} - Image ${currentPhotoIndex + 1}`}
-                  className="w-full h-auto rounded-lg shadow-lg max-h-96 object-cover transition-all duration-300 animate-in fade-in-0"
-                />
-                {/* 
-                {photos.length > 1 && (
-                  <>
-                    <button
-                      onClick={prevPhoto}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#0f1b61] rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110"
-                      aria-label="Previous image"
-                    >
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
-
-                    <button
-                      onClick={nextPhoto}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#0f1b61] rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110"
-                      aria-label="Next image"
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
-
-                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
-                      {photos.map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentPhotoIndex(index)}
-                          className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                            index === currentPhotoIndex ? "bg-[#7f15e9] scale-125" : "bg-white/70 hover:bg-white/90"
-                          }`}
-                          aria-label={`Go to image ${index + 1}`}
-                        />
-                      ))}
-                    </div>
-                  </>
-                )} */}
-              </div>
             )}
           </div>
         </div>

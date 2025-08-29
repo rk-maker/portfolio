@@ -47,12 +47,14 @@ export default function ProjectsSection() {
             onAnimationComplete={() => {
               setPrevAnimation(true);
             }}
+            animated={false}
           />
           <motion.div
-            variants={projectElementsAnimation}
-            initial="hidden"
-            animate={projectElementsAnimationControls}
-            custom={0}
+            className="py-4"
+            // variants={projectElementsAnimation}
+            // // initial="hidden"
+            // animate={projectElementsAnimationControls}
+            // custom={0}
           >
             <StripedButton onClick={handleClick}>
               Checkout all Projects
