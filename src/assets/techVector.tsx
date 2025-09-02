@@ -208,7 +208,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
         x: ["0%", "5%", "0%"], // Slight side movement
       }}
       transition={{
-        duration: 15, // Total duration of one loop
+        duration: 10, // Total duration of one loop
         repeat: Infinity, // Loop forever
         ease: "easeInOut", // Smooth easing
       }}
