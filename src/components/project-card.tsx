@@ -1,10 +1,12 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Badge from "./badge";
 import StripedButton from "./button";
+
 interface ProjectCardProps {
   title: string;
+  index: number;
   description: string;
   technologies: string[];
   media: {
@@ -17,10 +19,38 @@ interface ProjectCardProps {
     github?: string;
     demo?: string;
   };
-  detailedDescription?: string; // Added detailed description prop
-  features?: string[]; // Added features list prop
+  detailedDescription?: string;
+  features?: string[];
   className?: string;
 }
+
+const wrap = (min: number, max: number, v: number) => {
+  const range = max - min;
+  return ((((v - min) % range) + range) % range) + min;
+};
+
+const variants: Variants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 120 : -120,
+    rotate: direction > 0 ? 6 : -6,
+    opacity: 0,
+    scale: 0.96,
+  }),
+  center: {
+    x: 0,
+    rotate: 0,
+    opacity: 1,
+    scale: 1,
+    transition: { type: "spring", stiffness: 500, damping: 40 },
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -120 : 120,
+    rotate: direction > 0 ? -6 : 6,
+    opacity: 0,
+    scale: 0.96,
+    transition: { duration: 0.18 },
+  }),
+};
 
 export function ProjectCard({
   title,
@@ -31,12 +61,16 @@ export function ProjectCard({
   detailedDescription,
   features,
   className = "",
+  index,
 }: ProjectCardProps) {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const photos = Array.isArray(media.src) ? media.src : [media.src];
-
+  const photos = useMemo(
+    () => (Array.isArray(media.src) ? media.src : [media.src]),
+    [media.src]
+  );
   const nextPhoto = () => {
     setCurrentPhotoIndex((prev) => (prev + 1) % photos.length);
   };
@@ -45,73 +79,109 @@ export function ProjectCard({
     setCurrentPhotoIndex((prev) => (prev - 1 + photos.length) % photos.length);
   };
 
+  const prevIdx = wrap(0, photos.length, currentPhotoIndex - 1);
+  const nextIdx = wrap(0, photos.length, currentPhotoIndex + 1);
+
   return (
     <div className={`py-16 ${className}`}>
       <div className="max-w-6xl mx-auto px-6">
-        {/* Project Title with underline accent */}
-
-        <div className="grid md:grid-cols-2 gap-12  ">
+        <div key={index} className="grid md:grid-cols-2 gap-12 items-center">
           {/* Media Section */}
-          <div className="flex items-center justify-center ">
-            {media.type === "video" ? (
-              <iframe
-                width={560}
-                height={315}
-                src={`https://www.youtube.com/watch?v=wmde-jlQ5bY`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="rounded-lg"
-              ></iframe>
-            ) : (
-              <div className="relative w-full">
-                <img
-                  src={photos[currentPhotoIndex] || "/placeholder.svg"}
-                  alt={media.alt || `${title} - Image ${currentPhotoIndex + 1}`}
-                  className="w-full h-auto rounded-lg shadow-lg max-h-96 object-cover transition-all duration-300 animate-in fade-in-0"
-                />
-              </div>
-            )}
+          <div
+            className={
+              index % 2 === 0 ? "order-1 md:order-1" : "order-1 md:order-2"
+            }
+          >
+            <div className={`flex items-center justify-center`}>
+              {media.type === "video" ? (
+                <iframe
+                  width={560}
+                  height={315}
+                  src={`https://www.youtube.com/watch?v=wmde-jlQ5bY`}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="rounded-lg"
+                ></iframe>
+              ) : (
+                <div className="relative w-full max-w-sm mx-auto h-[420px]  flex items-center justify-center ">
+                  <img
+                    src={photos[currentPhotoIndex] || "/placeholder.svg"}
+                    alt={
+                      media.alt || `${title} - Image ${currentPhotoIndex + 1}`
+                    }
+                    className=" h-auto max-h-[400px] object-contain transition-all duration-300 animate-in fade-in-0 rounded-2xl bg-blue-400"
+                  />
+
+                  {photos.length > 1 && (
+                    <>
+                      <FaChevronLeft
+                        onClick={prevPhoto}
+                        className="w-15 h-15 absolute left-0 top-1/2 text-thirdy rounded-full p-3  transition-all duration-200 hover:scale-110"
+                      />
+
+                      <FaChevronRight
+                        className=" w-15 h-15 absolute right-0 top-1/2 text-thirdy rounded-full p-3  transition-all duration-200 hover:scale-110"
+                        onClick={nextPhoto}
+                      />
+
+                      <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+                        {photos.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => setCurrentPhotoIndex(index)}
+                            className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                              index === currentPhotoIndex
+                                ? "bg-thirdy scale-125"
+                                : "bg-primary hover:bg-primary border-2 border-thirdy"
+                            }`}
+                            aria-label={`Go to image ${index + 1}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
+          {/* Content Section */}
+          <div
+            className={
+              index % 2 === 0 ? "order-2 md:order-2" : "order-2 md:order-1"
+            }
+          >
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-4xl md:text-5xl font-bold text-[#0f1b61] mb-4">
+                  {title}
+                </h3>
+              </div>
 
-          {/*CONTENT sECTION*/}
+              <div className="flex flex-wrap gap-3">
+                {technologies.map((tech, index) => (
+                  <Badge key={index} label={tech} />
+                ))}
+              </div>
 
-          <div className="space-y-8">
-            <div className="">
-              <h3 className="text-4xl md:text-5xl font-bold text-[#0f1b61] mb-4">
-                {title}
-              </h3>
+              <p className="text-[#0f1b61] leading-relaxed text-lg">
+                {description}
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                {links.live && <StripedButton>Live Demo</StripedButton>}
+                {links.github && <StripedButton>Git repo</StripedButton>}
+              </div>
+
+              {(detailedDescription || features) && (
+                <StripedButton onClick={() => setIsExpanded(!isExpanded)}>
+                  {isExpanded ? `Less Details  ^` : `More Details  >`}
+                </StripedButton>
+              )}
             </div>
-            {/* Technology Tags */}
-            <div className="flex flex-wrap gap-3">
-              {technologies.map((tech, index) => (
-                <Badge key={index} label={tech} />
-              ))}
-            </div>
-
-            {/* Project Description */}
-            <p className="text-[#0f1b61] leading-relaxed text-lg">
-              {description}
-            </p>
-
-            {/* Action Links */}
-            <div className="flex flex-wrap gap-4">
-              {links.live && <StripedButton>Live Demo</StripedButton>}
-
-              {links.github && <StripedButton>Git repo</StripedButton>}
-            </div>
-
-            {/* Details Button */}
-            {(detailedDescription || features) && (
-              <StripedButton onClick={() => setIsExpanded(!isExpanded)}>
-                {isExpanded ? `Less Details  ^` : `More Details  >`}
-              </StripedButton>
-            )}
           </div>
         </div>
 
-        {/* Expanded Details Section */}
         {isExpanded && (detailedDescription || features) && (
           <div className="mt-12 pt-8 border-t-2 border-[#aee1f5] animate-in slide-in-from-top-2 duration-300">
             {detailedDescription && (

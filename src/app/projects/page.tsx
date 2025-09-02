@@ -57,6 +57,7 @@ Dive in to see how I turn ideas into functional, well-engineered solutions."
                 detailedDescription={project.detailedDescription}
                 features={project.features}
                 className=""
+                index={index}
               />
             </div>
           ))}

@@ -1,3 +1,5 @@
+import mainMenu from "../assets/pay-app-asset/main-menu.png";
+
 export const projects = [
   {
     id: 1,
@@ -11,7 +13,7 @@ export const projects = [
       alt: "E-Commerce Platform Demo",
     },
     links: {
-      live: "https://example.com",
+      live: "https://ibanking.nbp.com.pk/login",
     },
     detailedDescription:
       "This comprehensive e-commerce platform was built to handle high-traffic scenarios with advanced caching strategies and optimized database queries. The platform includes a sophisticated inventory management system, automated email notifications, and comprehensive analytics dashboard for business insights.",
@@ -27,9 +29,9 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Mobile Banking App",
+    title: "NBP Mobile Banking App",
     description:
-      "A secure mobile banking application with biometric authentication, real-time transactions, and comprehensive financial management tools for modern banking needs.",
+      "A award-winning mobile banking app boasts a 4.5-star rating and over 1 million downloads, delivering exceptional financial management with military-grade security. Featuring biometric authentication, instant money transfers,  bill payments, and Card Mangement, this React Native-powered app makes banking effortless and secure for modern users.",
     technologies: [
       "React Native",
       "Node.js",
@@ -40,53 +42,56 @@ export const projects = [
     media: {
       type: "photos" as const,
       src: [
-        "/mobile-banking-app-login-screen.png",
-        "/mobile-banking-app-dashboard.png",
-        "/mobile-banking-app-transaction-history.png",
-        "/mobile-banking-app-transfer-money.png",
+        "/nbp-app-asset/Login.png",
+        "/nbp-app-asset/card-manag.png",
+        "/nbp-app-asset/reciept.png",
+        "/nbp-app-asset/card-manag.png",
       ],
       alt: "Mobile Banking App Screenshots",
     },
     links: {
-      github: "https://github.com/username/banking-app",
-      demo: "https://banking-demo.example.com",
+      live: "https://play.google.com/store/apps/details?id=com.paysys.nbpdigital&hl=en",
     },
     detailedDescription:
-      "A cutting-edge mobile banking solution that prioritizes security and user experience. Built with React Native for cross-platform compatibility, featuring end-to-end encryption, biometric authentication, and real-time fraud detection systems.",
+      "This comprehensive mobile banking solution was developed using cutting-edge React Native technology, ensuring seamless performance across both iOS and Android platforms. The app incorporates advanced security features including online fingerprint authentication and end-to-end encryption to protect user data. It handles real-time transactions, NFC payments for contactless purchases, and comprehensive card management including virtual card creation capabilities. The intuitive interface supports multi-language functionality and multi-theme options for personalized user experience, with offline capabilities and instant notifications keeping users connected. With its robust architecture and user-friendly design, it's the preferred choice for over a million satisfied customers worldwide.",
     features: [
       "Biometric login (fingerprint and face recognition)",
       "Real-time transaction notifications and alerts",
       "Secure peer-to-peer money transfers",
-      "Bill payment automation and scheduling",
-      "Spending analytics and budget tracking",
+      "Bill payment and scheduling",
+      "Virtual Card creation",
+      "Multi-theme for UX expereince",
       "Multi-language support and accessibility features",
     ],
   },
   {
     id: 3,
-    title: "Weather Dashboard",
+    title: "PayApp Merchant",
     description:
-      "A responsive weather dashboard with location-based forecasts, interactive maps, and detailed weather analytics. Features clean design and real-time data updates.",
+      "PayApp, the ultimate payment solution designed exclusively for your local kirana stores. We bridge the gap between traditional shopping and modern convenience, making every transaction swift, secure, and seamless.",
     technologies: ["React", "Chart.js", "Weather API", "CSS Grid", "PWA"],
     media: {
-      type: "video" as const,
-      src: "/weather-dashboard-demo.png",
+      type: "photos" as const,
+      src: [
+        "/pay-app-asset/main-menu.png",
+        "/pay-app-asset/tran-summary.png",
+        "/pay-app-asset/transaction.png",
+        "/pay-app-asset/main-menu.png",
+      ],
       alt: "Weather Dashboard Demo",
     },
     links: {
       live: "https://weather.example.com",
-      github: "https://github.com/username/weather-dashboard",
-      demo: "https://weather-demo.example.com",
     },
     detailedDescription:
-      "An advanced weather dashboard that aggregates data from multiple weather APIs to provide the most accurate forecasts. Features interactive maps, historical weather data analysis, and personalized weather alerts based on user preferences and location.",
+      "This innovative payment application was specifically crafted to revolutionize local retail experiences by connecting neighborhood kirana stores with cutting-edge digital payment technology. The app features advanced biometric login and fingerprint registration for secure access, along with NFC payment capabilities for contactless transactions. Store owners benefit from subsidies provided to merchants, comprehensive transaction history tracking, and easy product addition functionality that simplifies inventory management. With its intuitive design focused on small business needs, PayApp empowers local store owners to embrace digital payments while maintaining operational simplicity, transforming traditional kirana stores into modern, efficient retail hubs that customers love to visit.",
     features: [
-      "7-day detailed weather forecasts with hourly breakdowns",
-      "Interactive weather maps with radar and satellite imagery",
-      "Severe weather alerts and notifications",
-      "Historical weather data and trend analysis",
-      "Multiple location tracking and comparison",
-      "Offline functionality with cached weather data",
+      "Merchant Subsidies - Financial incentives and support programs for local store owners",
+      "NFC Payments - Contactless payment processing for quick and secure transactions",
+      "Transaction History - Complete record tracking of all payment activities and sales",
+      "Biometric Login - Secure authentication using fingerprint technology",
+      "Biometric & Finger Registration - Easy setup and management of biometric access",
+      "Easy Product Addition - Simplified inventory management with quick product catalog updates",
     ],
   },
 ];
