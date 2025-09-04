@@ -48,7 +48,7 @@ Dive in to see how I turn ideas into functional, well-engineered solutions."
           {projects.map((project, index) => (
             <div>
               <ProjectCard
-                key={project.id}
+                key={index}
                 title={project.title}
                 description={project.description}
                 technologies={project.technologies}
@@ -61,6 +61,18 @@ Dive in to see how I turn ideas into functional, well-engineered solutions."
               />
             </div>
           ))}
+        </div>
+        <div className="w-full justify-center items-center flex flex-col">
+          <div className="w-2/2 border-b-1 border-secondary  mt-8 mb-8"></div>
+          <SectionHeader
+            heading={
+              "Each project tells a story. More stories are being written…"
+            }
+            width={"large"}
+            description={""}
+            animated={false}
+            align={"center"}
+          />
         </div>
       </div>
     </>

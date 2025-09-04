@@ -12,7 +12,7 @@ import Navbar from "@/components/navbar";
 // });
 
 export const metadata: Metadata = {
-  title: "Raffay",
+  title: "Raffay's portfolio",
   description: "Raffay khan portfolio",
   icons: {
     icon: "/logo.png",

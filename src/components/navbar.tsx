@@ -5,8 +5,14 @@ import AnimatedButton from "./secondaryTextButon";
 import StackedIcon from "./shadowIcon";
 import { IoChatbubbleOutline, IoChatbubbleSharp } from "react-icons/io5";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.back();
+  };
   return (
     <nav
       className="fixed z-10 flex items-center justify-between left-0 right-0 mx-auto px-10 py-8"
@@ -14,6 +20,7 @@ const Navbar = () => {
     >
       <div className="flex">
         <motion.div
+          onClick={handleClick}
           whileHover={{
             scale: 1.1,
 

@@ -87,6 +87,7 @@ export default function AboutSection() {
             heading="Meet the Maker"
             description="Full-stack developer passionate about clean code, smart solutions, and continuous learning. Always curious, always improving."
           />
+          <div className=" w-full h-6" />
           <div className="flex ">
             {socialIcons.map((icon, i) => {
               const Icon = icon.icon;
