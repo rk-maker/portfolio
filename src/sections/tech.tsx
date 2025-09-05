@@ -69,7 +69,7 @@ export default function TechSkillsSection() {
           initial="hidden"
           animate={inView ? "show" : "hidden"}
         >
-          <div className="relative w-60 h-60 md:w-[300px] md:h-[300px]">
+          <div className="relative w-70 h-70 md:w-[350px] md:h-[350px]">
             {/* Circle in background */}
             <motion.div
               id="rounded"
