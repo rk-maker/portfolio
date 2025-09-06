@@ -69,41 +69,37 @@ export default function ProjectsSection() {
   };
   return (
     <section
+      ref={sectionRef}
       id="projects"
       className="h-screen w-full justify-center items-center "
     >
       <div className="flex w-full h-full items-center" ref={lineRef}>
-        <motion.div
-          className="w-1/2 flex items-center justify-center"
-          variants={bounceUp}
-          initial="hidden"
-          animate={inView ? "show" : "hidden"}
-        >
-          <div className="relative w-70 h-70 md:w-[350px] md:h-[350px]">
-            {/* Circle in background */}
-            <motion.div
-              id="rounded"
-              className="hover-striped-bg rounded-full w-full h-full absolute inset-0 z-0"
-              style={{
-                x: springX,
-                y: springY,
-              }}
-            />
-            <ComputerSVG className="absolute -bottom-9 -right-20 top- h-auto z-10" />
-          </div>
-        </motion.div>
-        <div className="">
+        <div className="w-1/2  flex flex-col items-end justify-end">
           <SectionHeader
             heading="What I've Built"
-            description="From frontend interfaces to backend logic, I craft projects that are both functional and user-friendly designs to make an impact."
+            description={
+              <span>
+                From frontend interfaces to backend logic, I focus on crafting
+                projects that are both functional and user-friendly, ensuring
+                every detail contributes to a seamless experience. On the
+                frontend, I design intuitive, responsive, and visually engaging
+                applications that prioritize usability and accessibility. <br />
+                <br />
+                On the backend, I develop reliable architectures and efficient
+                workflows that bring these interfaces to life, combining
+                performance with scalability. By bridging design with technical
+                precision, I create solutions that not only work smoothly but
+                also leave a lasting impact on the people who use them.
+              </span>
+            }
             onAnimationComplete={() => {
               setPrevAnimation(true);
             }}
-            width="medium"
+            width="large"
             animated={false}
           />
           <motion.div
-            className="py-4"
+            className="py-4 flex self-center -translate-x-[115px]"
             // variants={projectElementsAnimation}
             // // initial="hidden"
             // animate={projectElementsAnimationControls}
@@ -112,6 +108,27 @@ export default function ProjectsSection() {
             <StripedButton onClick={handleClick}>
               Checkout all Projects
             </StripedButton>
+          </motion.div>
+        </div>
+        <div className="w-1/2 flex items-center justify-center ">
+          <motion.div
+            className=""
+            variants={bounceUp}
+            initial="hidden"
+            animate={inView ? "show" : "hidden"}
+          >
+            <div className="relative w-70 h-70 md:w-[400px] md:h-[400px]">
+              {/* Circle in background */}
+              <motion.div
+                id="rounded"
+                className="hover-striped-bg rounded-full w-full h-full absolute inset-0 z-0"
+                style={{
+                  x: springX,
+                  y: springY,
+                }}
+              />
+              <ComputerSVG className="absolute -bottom-9 -right-20 top- h-auto z-10" />
+            </div>
           </motion.div>
         </div>
       </div>

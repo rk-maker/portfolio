@@ -12,7 +12,7 @@ const ComputerSVG = (props: SVGProps<SVGSVGElement>) => (
   >
     <style type="text/css">
       {
-        ".st70{fill:#F4F9FC;}\r\n\t.st71{fill:none;stroke:#F4F9FC;stroke-width:3;stroke-miterlimit:10;}\r\n\t.st72{fill:#AADCEC;}\r\n\t.st73{fill:none;stroke:#AADCEC;stroke-width:3;stroke-miterlimit:10;}\r\n\t.st74{fill:none;stroke:#7E66C7;stroke-width:2;stroke-miterlimit:10;}\r\n\t.st75{fill:none;stroke:#7E66C7;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;}\r\n\t.st76{fill:#7E66C7;}"
+        ".st70{fill:#F4F9FC;}\r\n\t.st71{fill:none;stroke:#F4F9FC;stroke-width:3;stroke-miterlimit:10;}\r\n\t.st72{fill:#AADCEC;}\r\n\t.st73{fill:none;stroke:#AADCEC;stroke-width:3;stroke-miterlimit:10;}\r\n\t.st74{fill:none;stroke:#7F15E9;stroke-width:2;stroke-miterlimit:10;}\r\n\t.st75{fill:none;stroke:#7F15E9;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;}\r\n\t.st76{fill:#7F15E9;}"
       }
     </style>
     <g id="Layer_6">

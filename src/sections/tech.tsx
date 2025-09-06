@@ -4,13 +4,11 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useSpring } from "framer-motion";
 
 import SvgComponent from "@/assets/techVector";
-import TextBlock from "@/components/TextBlock";
 import { useInView } from "react-intersection-observer";
 import { bounceUp } from "@/Helper";
 import SectionHeader from "@/components/sectionHeader";
 
 export default function TechSkillsSection() {
-  const [prevAnimation, setPrevAnimation] = useState(false);
   const [lineRef, inView] = useInView({
     threshold: 0.7,
     triggerOnce: true,
