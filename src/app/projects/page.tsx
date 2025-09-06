@@ -46,7 +46,7 @@ Dive in to see how I turn ideas into functional, well-engineered solutions."
         {/* Projects List - each project is now a full section */}
         <div className="divide-y-2 divide-[#aee1f5]/30">
           {projects.map((project, index) => (
-            <div>
+            <div key={index}>
               <ProjectCard
                 key={index}
                 title={project.title}
