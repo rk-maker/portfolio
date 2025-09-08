@@ -5,7 +5,7 @@ import SectionHeader from "@/components/sectionHeader";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { motion, useAnimation, Variants } from "framer-motion";
-
+const date = new Date();
 const socialIcons = [
   { name: "Twitter", icon: FaTwitter, url: "https://x.com/Rk_raffay" },
   { name: "GitHub", icon: FaGithub, url: "https://github.com/rk-maker" },
@@ -175,7 +175,7 @@ export default function AboutSection() {
             animate={aboutElementsAnimationControls}
             className="mt-4 text-center text-sm text-gray-500"
           >
-            © 2025 Raffay Khan
+            {`© ${date.getFullYear()} Raffay Khan`}
           </motion.p>
         </div>
       </div>
