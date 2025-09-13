@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import SectionHeader from "@/components/sectionHeader";
-import { motion, useAnimation, Variants, useSpring } from "framer-motion";
+import { motion, useAnimation, useSpring } from "framer-motion";
 import StripedButton from "@/components/button";
 import { useRouter } from "next/navigation";
 import { useInView } from "react-intersection-observer";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useSpring } from "framer-motion";
 
 import SvgComponent from "@/assets/techVector";

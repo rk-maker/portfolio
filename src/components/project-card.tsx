@@ -1,5 +1,4 @@
 import { useState, useMemo, useEffect } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Badge from "./badge";
 import StripedButton from "./button";
@@ -24,33 +23,28 @@ interface ProjectCardProps {
   className?: string;
 }
 
-const wrap = (min: number, max: number, v: number) => {
-  const range = max - min;
-  return ((((v - min) % range) + range) % range) + min;
-};
-
-const variants: Variants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? 120 : -120,
-    rotate: direction > 0 ? 6 : -6,
-    opacity: 0,
-    scale: 0.96,
-  }),
-  center: {
-    x: 0,
-    rotate: 0,
-    opacity: 1,
-    scale: 1,
-    transition: { type: "spring", stiffness: 500, damping: 40 },
-  },
-  exit: (direction: number) => ({
-    x: direction > 0 ? -120 : 120,
-    rotate: direction > 0 ? -6 : 6,
-    opacity: 0,
-    scale: 0.96,
-    transition: { duration: 0.18 },
-  }),
-};
+// const variants: Variants = {
+//   enter: (direction: number) => ({
+//     x: direction > 0 ? 120 : -120,
+//     rotate: direction > 0 ? 6 : -6,
+//     opacity: 0,
+//     scale: 0.96,
+//   }),
+//   center: {
+//     x: 0,
+//     rotate: 0,
+//     opacity: 1,
+//     scale: 1,
+//     transition: { type: "spring", stiffness: 500, damping: 40 },
+//   },
+//   exit: (direction: number) => ({
+//     x: direction > 0 ? -120 : 120,
+//     rotate: direction > 0 ? -6 : 6,
+//     opacity: 0,
+//     scale: 0.96,
+//     transition: { duration: 0.18 },
+//   }),
+// };
 
 export function ProjectCard({
   title,
@@ -64,7 +58,6 @@ export function ProjectCard({
   index,
 }: ProjectCardProps) {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -83,8 +76,6 @@ export function ProjectCard({
     const timer = setTimeout(() => setLoading(false), 3000); // 3s fallback
     return () => clearTimeout(timer);
   }, []);
-  const prevIdx = wrap(0, photos.length, currentPhotoIndex - 1);
-  const nextIdx = wrap(0, photos.length, currentPhotoIndex + 1);
 
   return (
     <div className={`py-16 ${className}`}>

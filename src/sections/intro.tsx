@@ -1,13 +1,7 @@
 "use client";
 import { SvgComponent } from "../assets/avatarSVG";
 import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useAnimation,
-  useTransform,
-  useScroll,
-  Variants,
-} from "framer-motion";
+import { motion, useAnimation, useTransform, useScroll } from "framer-motion";
 import { bounceUp } from "@/Helper";
 import { ScrollIndicator } from "@/components/scrollIndeicator";
 
@@ -35,42 +29,42 @@ const strippedGrow = {
   },
 };
 
-const grow: Variants = {
-  hidden: { scaleY: 0 },
-  show: {
-    scaleY: 1,
-    transition: {
-      duration: 0.4,
-      ease: "easeOut",
-    },
-  },
-};
+// const grow: Variants = {
+//   hidden: { scaleY: 0 },
+//   show: {
+//     scaleY: 1,
+//     transition: {
+//       duration: 0.4,
+//       ease: "easeOut",
+//     },
+//   },
+// };
 
-const wordAppear: Variants = {
-  hidden: { opacity: 0, filter: "blur(5px)" },
-  show: {
-    opacity: 1,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-};
+// const wordAppear: Variants = {
+//   hidden: { opacity: 0, filter: "blur(5px)" },
+//   show: {
+//     opacity: 1,
+//     filter: "blur(0px)",
+//     transition: {
+//       duration: 0.5,
+//       ease: "easeOut",
+//     },
+//   },
+// };
 
-const waveLetter: Variants = {
-  hidden: { y: 0, opacity: 1 },
-  show: (i: number) => ({
-    y: [0, -10, 0],
-    transition: {
-      duration: 0.6,
-      delay: i * 0.1,
-      repeat: Infinity, // repeat forever
-      repeatDelay: 6, // wait 6 seconds before repeating
-      repeatType: "loop",
-    },
-  }),
-};
+// const waveLetter: Variants = {
+//   hidden: { y: 0, opacity: 1 },
+//   show: (i: number) => ({
+//     y: [0, -10, 0],
+//     transition: {
+//       duration: 0.6,
+//       delay: i * 0.1,
+//       repeat: Infinity, // repeat forever
+//       repeatDelay: 6, // wait 6 seconds before repeating
+//       repeatType: "loop",
+//     },
+//   }),
+// };
 
 export default function IntroSection() {
   const containerRef = useRef<HTMLDivElement>(null);

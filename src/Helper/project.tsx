@@ -1,5 +1,3 @@
-import mainMenu from "../assets/pay-app-asset/main-menu.png";
-
 export const projects = [
   {
     id: 1,

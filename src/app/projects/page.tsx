@@ -1,10 +1,9 @@
 "use client";
-import SvgComponent from "@/assets/techVector";
 import { ProjectCard } from "@/components/project-card";
 import { ScrollIndicator } from "@/components/scrollIndeicator";
 import SectionHeader from "@/components/sectionHeader";
 import { projects } from "@/Helper/project";
-import { motion, useAnimation, Variants } from "framer-motion";
+import { useAnimation } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function ProjectsSection() {
