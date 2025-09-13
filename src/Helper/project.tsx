@@ -9,7 +9,7 @@ export const projects = [
     technologies: ["React", "TypeScript", "Springboot", "Mysql", "JAVA"],
     media: {
       type: "video" as const,
-      src: "/ecommerce-platform-demo-video.png",
+      src: "/nbp-app-asset/nbpIB.mp4",
       alt: "E-Commerce Platform Demo",
     },
     links: {

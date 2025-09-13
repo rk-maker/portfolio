@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Badge from "./badge";
@@ -66,6 +66,7 @@ export function ProjectCard({
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const photos = useMemo(
     () => (Array.isArray(media.src) ? media.src : [media.src]),
@@ -78,7 +79,10 @@ export function ProjectCard({
   const prevPhoto = () => {
     setCurrentPhotoIndex((prev) => (prev - 1 + photos.length) % photos.length);
   };
-
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000); // 3s fallback
+    return () => clearTimeout(timer);
+  }, []);
   const prevIdx = wrap(0, photos.length, currentPhotoIndex - 1);
   const nextIdx = wrap(0, photos.length, currentPhotoIndex + 1);
 
@@ -94,15 +98,35 @@ export function ProjectCard({
           >
             <div className={`flex items-center justify-center`}>
               {media.type === "video" ? (
-                <iframe
-                  width={560}
-                  height={315}
-                  src={`https://www.youtube.com/watch?v=wmde-jlQ5bY`}
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="rounded-lg"
-                ></iframe>
+                <div className="relative w-[560px] h-[315px] rounded-lg">
+                  {/* Skeleton Loader */}
+                  {loading && (
+                    <div className="absolute inset-0 animate-pulse bg-gray-300 rounded-lg flex items-center justify-center">
+                      <svg
+                        className="w-12 h-12 text-gray-500"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M6 4l12 6-12 6V4z" />
+                      </svg>
+                    </div>
+                  )}
+
+                  <video
+                    width={560}
+                    height={315}
+                    controls
+                    preload="auto"
+                    className={`rounded-lg transition-opacity duration-300 ${
+                      loading ? "opacity-0" : "opacity-100"
+                    }`}
+                    onLoadedData={() => setLoading(false)}
+                    onCanPlay={() => setLoading(false)}
+                  >
+                    <source src={media.src as string} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
               ) : (
                 <div className="relative w-full max-w-sm mx-auto h-[420px]  flex items-center justify-center ">
                   <img
