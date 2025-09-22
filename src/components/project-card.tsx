@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Badge from "./badge";
 import StripedButton from "./button";
+import Image from "next/image";
 
 interface ProjectCardProps {
   title: string;
@@ -120,12 +121,14 @@ export function ProjectCard({
                 </div>
               ) : (
                 <div className="relative w-full max-w-sm mx-auto h-[420px]  flex items-center justify-center ">
-                  <img
+                  <Image
                     src={photos[currentPhotoIndex] || "/placeholder.svg"}
                     alt={
                       media.alt || `${title} - Image ${currentPhotoIndex + 1}`
                     }
-                    className=" h-auto max-h-[400px] object-contain transition-all duration-300 animate-in fade-in-0 rounded-2xl bg-blue-400"
+                    width={800} // adjust based on expected size
+                    height={400} // adjust based on expected size
+                    className="h-auto max-h-[400px] object-contain transition-all duration-300 animate-in fade-in-0 rounded-2xl bg-transparent"
                   />
 
                   {photos.length > 1 && (
