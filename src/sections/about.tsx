@@ -5,6 +5,8 @@ import SectionHeader from "@/components/sectionHeader";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { motion, useAnimation, Variants } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
 const date = new Date();
 const socialIcons = [
   { name: "Twitter", icon: FaTwitter, url: "https://x.com/Rk_raffay" },
@@ -34,6 +36,10 @@ const socialVariants: Variants = {
 };
 
 export default function AboutSection() {
+  const [lineRef, inView] = useInView({
+    threshold: 0.7,
+    triggerOnce: true,
+  });
   const [prevAnimation, setPrevAnimation] = useState(false);
   const socialIconsControls = useAnimation();
   const aboutElementsAnimationControls = useAnimation();
@@ -55,13 +61,13 @@ export default function AboutSection() {
 
   useEffect(() => {
     async function sequence() {
-      if (prevAnimation) {
+      if (inView) {
         await socialIconsControls.start("visible");
         aboutElementsAnimationControls.start("visible");
       }
     }
     sequence();
-  }, [prevAnimation, socialIconsControls, aboutElementsAnimationControls]);
+  }, [socialIconsControls, aboutElementsAnimationControls, inView]);
 
   const handleResumeDownload = () => {
     const link = document.createElement("a");
@@ -79,11 +85,12 @@ export default function AboutSection() {
       className="h-screen w-full justify-center items-center flex flex-col bg-primary"
     >
       <div className="container px-8 mx-auto">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto" ref={lineRef}>
           <SectionHeader
             onAnimationComplete={() => {
               setPrevAnimation(true);
             }}
+            animated={false}
             heading="Meet the Maker"
             description="Full-stack developer passionate about clean code, smart solutions, and continuous learning. Always curious, always improving."
           />
@@ -155,7 +162,7 @@ export default function AboutSection() {
                 </div>
               </motion.div>
             </div>
-            <motion.div
+            {/* <motion.div
               custom={4}
               variants={aboutElementsAnimation}
               initial="hidden"
@@ -164,7 +171,7 @@ export default function AboutSection() {
               <StripedButton onClick={handleResumeDownload}>
                 Download Resume
               </StripedButton>
-            </motion.div>
+            </motion.div> */}
           </div>
           {/* Bottom line and name */}
           <div className="mt-12 w-full border-t border-gray-300"></div>

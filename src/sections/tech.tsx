@@ -62,7 +62,7 @@ export default function TechSkillsSection() {
       <div className="flex w-full h-full items-center" ref={lineRef}>
         {/* Left half: Circle + SVG */}
         <motion.div
-          className="w-1/2 flex items-center justify-center"
+          className="w-1/2 flex items-center justify-center "
           variants={bounceUp}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
