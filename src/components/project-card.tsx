@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Badge from "./badge";
 import StripedButton from "./button";
@@ -61,7 +61,35 @@ export function ProjectCard({
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
 
+    let animationId: number;
+    let scrollPosition = 0;
+    const scrollSpeed = 0.5; // pixels per frame
+
+    const animate = () => {
+      scrollPosition += scrollSpeed;
+
+      // Reset position when we've scrolled past the first set of images
+      if (scrollPosition >= scrollContainer.scrollWidth / 2) {
+        scrollPosition = 0;
+      }
+
+      scrollContainer.scrollLeft = scrollPosition;
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, []);
   const photos = useMemo(
     () => (Array.isArray(media.src) ? media.src : [media.src]),
     [media.src]
@@ -120,46 +148,97 @@ export function ProjectCard({
                   </video>
                 </div>
               ) : (
-                <div className="relative w-full max-w-sm mx-auto h-[420px]  flex items-center justify-center ">
-                  <Image
-                    src={photos[currentPhotoIndex] || "/placeholder.svg"}
-                    alt={
-                      media.alt || `${title} - Image ${currentPhotoIndex + 1}`
-                    }
-                    width={800} // adjust based on expected size
-                    height={400} // adjust based on expected size
-                    className="h-auto max-h-[400px] object-contain transition-all duration-300 animate-in fade-in-0 rounded-2xl bg-transparent"
-                  />
+                <div className="relative w-[560px] h-[300px] mx-auto overflow-hidden rounded-lg ">
+                  {/* Left overlay - 20% width */}
+                  <div className="absolute left-0 top-0 w-[112px] h-full bg-gradient-to-r from-black/20 to-transparent  dark:to-transparent z-10 pointer-events-none" />
 
-                  {photos.length > 1 && (
-                    <>
-                      <FaChevronLeft
-                        onClick={prevPhoto}
-                        className="w-15 h-15 absolute left-0 top-1/2 text-thirdy rounded-full p-3  transition-all duration-200 hover:scale-110"
-                      />
+                  {/* Right overlay - 20% width */}
+                  <div className="absolute right-0 top-0 w-[112px] h-full bg-gradient-to-l from-black/20 to-transparent  dark:to-transparent z-10 pointer-events-none" />
 
-                      <FaChevronRight
-                        className=" w-15 h-15 absolute right-0 top-1/2 text-thirdy rounded-full p-3  transition-all duration-200 hover:scale-110"
-                        onClick={nextPhoto}
-                      />
-
-                      <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
-                        {photos.map((_, index) => (
-                          <button
-                            key={index}
-                            onClick={() => setCurrentPhotoIndex(index)}
-                            className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                              index === currentPhotoIndex
-                                ? "bg-thirdy scale-125"
-                                : "bg-primary hover:bg-primary border-2 border-thirdy"
-                            }`}
-                            aria-label={`Go to image ${index + 1}`}
-                          />
-                        ))}
+                  {/* Scrolling container */}
+                  <div
+                    ref={scrollRef}
+                    className="flex h-full items-center gap-4 px-4 overflow-hidden"
+                    style={{
+                      scrollBehavior: "auto",
+                      scrollbarWidth: "none",
+                      msOverflowStyle: "none",
+                    }}
+                  >
+                    {/* First set of images */}
+                    {photos.map((src, index) => (
+                      <div
+                        key={`first-${index}`}
+                        className="flex-shrink-0 h-[280px] w-[157px] rounded-lg overflow-hidden shadow-lg bg-white dark:bg-slate-900"
+                      >
+                        <img
+                          src={src || "/placeholder.svg"}
+                          alt={`Mobile app screenshot ${index + 1}`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
                       </div>
-                    </>
-                  )}
+                    ))}
+
+                    {/* Duplicate set for seamless loop */}
+                    {photos.map((src, index) => (
+                      <div
+                        key={`second-${index}`}
+                        className="flex-shrink-0 h-[280px] w-[157px] rounded-lg overflow-hidden shadow-lg bg-white dark:bg-slate-900"
+                      >
+                        <img
+                          src={src || "/placeholder.svg"}
+                          alt={`Mobile app screenshot ${index + 1}`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Bottom gradient for extra depth */}
+                  <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black/10 to-transparent dark:from-black/20 dark:to-transparent pointer-events-none" />
                 </div>
+                // <div className="relative w-full max-w-sm mx-auto h-[420px]  flex items-center justify-center ">
+                //   <Image
+                //     src={photos[currentPhotoIndex] || "/placeholder.svg"}
+                //     alt={
+                //       media.alt || `${title} - Image ${currentPhotoIndex + 1}`
+                //     }
+                //     width={800} // adjust based on expected size
+                //     height={400} // adjust based on expected size
+                //     className="h-auto max-h-[400px] object-contain transition-all duration-300 animate-in fade-in-0 rounded-2xl bg-transparent"
+                //   />
+
+                //   {photos.length > 1 && (
+                //     <>
+                //       <FaChevronLeft
+                //         onClick={prevPhoto}
+                //         className="w-15 h-15 absolute left-0 top-1/2 text-thirdy rounded-full p-3  transition-all duration-200 hover:scale-110"
+                //       />
+
+                //       <FaChevronRight
+                //         className=" w-15 h-15 absolute right-0 top-1/2 text-thirdy rounded-full p-3  transition-all duration-200 hover:scale-110"
+                //         onClick={nextPhoto}
+                //       />
+
+                //       <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+                //         {photos.map((_, index) => (
+                //           <button
+                //             key={index}
+                //             onClick={() => setCurrentPhotoIndex(index)}
+                //             className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                //               index === currentPhotoIndex
+                //                 ? "bg-thirdy scale-125"
+                //                 : "bg-primary hover:bg-primary border-2 border-thirdy"
+                //             }`}
+                //             aria-label={`Go to image ${index + 1}`}
+                //           />
+                //         ))}
+                //       </div>
+                //     </>
+                //   )}
+                // </div>
               )}
             </div>
           </div>
