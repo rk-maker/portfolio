@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import StripedButton from "@/components/button";
 import SectionHeader from "@/components/sectionHeader";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
@@ -40,7 +39,6 @@ export default function AboutSection() {
     threshold: 0.7,
     triggerOnce: true,
   });
-  const [prevAnimation, setPrevAnimation] = useState(false);
   const socialIconsControls = useAnimation();
   const aboutElementsAnimationControls = useAnimation();
   const aboutElementsAnimation: Variants = {
@@ -69,15 +67,15 @@ export default function AboutSection() {
     sequence();
   }, [socialIconsControls, aboutElementsAnimationControls, inView]);
 
-  const handleResumeDownload = () => {
-    const link = document.createElement("a");
-    link.href =
-      "https://drive.google.com/uc?export=download&id=1MoixaiihdrGbjAh9biVJhsbKtfZ6IJre";
-    link.download = "resume.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  // const handleResumeDownload = () => {
+  //   const link = document.createElement("a");
+  //   link.href =
+  //     "https://drive.google.com/uc?export=download&id=1MoixaiihdrGbjAh9biVJhsbKtfZ6IJre";
+  //   link.download = "resume.pdf";
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
 
   return (
     <section
@@ -87,9 +85,6 @@ export default function AboutSection() {
       <div className="container px-8 mx-auto">
         <div className="max-w-6xl mx-auto" ref={lineRef}>
           <SectionHeader
-            onAnimationComplete={() => {
-              setPrevAnimation(true);
-            }}
             animated={false}
             heading="Meet the Maker"
             description="Full-stack developer passionate about clean code, smart solutions, and continuous learning. Always curious, always improving."
