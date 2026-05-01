@@ -1,7 +1,14 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import SectionHeader from "@/components/sectionHeader";
-import { motion, useAnimation, useSpring } from "framer-motion";
+import {
+  motion,
+  useAnimation,
+  useSpring,
+  useTransform,
+  useScroll,
+} from "framer-motion";
+
 import StripedButton from "@/components/button";
 import { useRouter } from "next/navigation";
 import { useInView } from "react-intersection-observer";
@@ -9,6 +16,14 @@ import { bounceUp } from "@/Helper";
 import ComputerSVG from "@/assets/computerSvg";
 
 export default function ProjectsSection() {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  //parralex effect
+  const leftColumnY = useTransform(scrollYProgress, [0, 1], [0, 0]); // Fast
+  const rightColumnY = useTransform(scrollYProgress, [0, 1], [200, -300]); // Slow
   const router = useRouter();
   const [prevAnimation, setPrevAnimation] = useState(false);
   const projectElementsAnimationControls = useAnimation();
@@ -20,8 +35,6 @@ export default function ProjectsSection() {
   // Smooth motion springs
   const springX = useSpring(0, { stiffness: 15, damping: 20 });
   const springY = useSpring(0, { stiffness: 15, damping: 20 });
-
-  const sectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const sectionEl = sectionRef.current;
@@ -74,7 +87,10 @@ export default function ProjectsSection() {
       className="h-screen w-full justify-center items-center "
     >
       <div className="flex w-full h-full items-center" ref={lineRef}>
-        <div className="w-1/2  flex flex-col items-end justify-end">
+        <motion.div
+          className="w-1/2  flex flex-col items-end justify-end"
+          style={{ y: leftColumnY }}
+        >
           <SectionHeader
             heading="What I've Built"
             description={
@@ -109,8 +125,11 @@ export default function ProjectsSection() {
               Checkout all Projects
             </StripedButton>
           </motion.div>
-        </div>
-        <div className="w-1/2 flex items-center justify-center ">
+        </motion.div>
+        <motion.div
+          className="w-1/2 flex items-center justify-center "
+          style={{ y: rightColumnY }}
+        >
           <motion.div
             className=""
             variants={bounceUp}
@@ -130,7 +149,7 @@ export default function ProjectsSection() {
               <ComputerSVG className="absolute -bottom-9 -right-20 top- h-auto z-10" />
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

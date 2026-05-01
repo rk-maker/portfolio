@@ -29,43 +29,6 @@ const strippedGrow = {
   },
 };
 
-// const grow: Variants = {
-//   hidden: { scaleY: 0 },
-//   show: {
-//     scaleY: 1,
-//     transition: {
-//       duration: 0.4,
-//       ease: "easeOut",
-//     },
-//   },
-// };
-
-// const wordAppear: Variants = {
-//   hidden: { opacity: 0, filter: "blur(5px)" },
-//   show: {
-//     opacity: 1,
-//     filter: "blur(0px)",
-//     transition: {
-//       duration: 0.5,
-//       ease: "easeOut",
-//     },
-//   },
-// };
-
-// const waveLetter: Variants = {
-//   hidden: { y: 0, opacity: 1 },
-//   show: (i: number) => ({
-//     y: [0, -10, 0],
-//     transition: {
-//       duration: 0.6,
-//       delay: i * 0.1,
-//       repeat: Infinity, // repeat forever
-//       repeatDelay: 6, // wait 6 seconds before repeating
-//       repeatType: "loop",
-//     },
-//   }),
-// };
-
 export default function IntroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [startScrollAnimate, setStartScrollAnimate] = useState(false);
@@ -94,13 +57,6 @@ export default function IntroSection() {
         bounceUpControls.start("show"),
       ]);
       setStartScrollAnimate(true);
-      // 3. grow + wordAppear (vertical line + scroll word)
-      // await Promise.all([
-      //   growControls.start("show"),
-      //   wordAppearControls.start("show"),
-      // ]);
-      // // 4. waveLetter animation (letters)
-      // await waveLetterControls.start("show");
     }
     sequence();
   }, [
@@ -148,10 +104,9 @@ export default function IntroSection() {
               >
                 <p className="font-light">
                   {`I'm a `}
-                  <span className="font-bold">Full Stack developer</span>
-                  from
+                  <span className="font-bold">Full Stack Developer</span>
                 </p>
-                <p className="font-light">Pakistan.</p>
+                {/* <p className="font-light">Pakistan.</p> */}
               </motion.div>
             </div>
             {/* text area */}

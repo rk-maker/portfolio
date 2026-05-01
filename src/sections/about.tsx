@@ -149,10 +149,10 @@ export default function AboutSection() {
                 <span className="text-sm text-font">Phone</span>
                 <div>
                   <a
-                    href="tel:+4915560817357"
+                    href="tel:+4915567060036"
                     className="transition-colors text-thirdy hover:text-font"
                   >
-                    (+49)-15560817357
+                    (+49)-15567060036
                   </a>
                 </div>
               </motion.div>

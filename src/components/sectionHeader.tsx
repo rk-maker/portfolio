@@ -58,7 +58,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   description,
   align = "left",
   headingSize = "lg",
-  width = "small",
+  width = "large",
   animated = true,
   descriptionSize = "small",
   onAnimationComplete,
