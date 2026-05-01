@@ -8,8 +8,10 @@
   --color-primary-hover: #7f15e9;
   --color-primary-light: rgba(72, 49, 212, 0.1);
   --color-font: #0f1b61;
+}
 
-  --font-dmsans: "DM Sans", "sans-serif";
+:root {
+  --font-dmsans: "DM Sans", system-ui, sans-serif;
 }
 :root {
   --color-primary: #f4f9fc;
@@ -83,7 +85,9 @@ h6 {
   );
   border-radius: calc(0.5rem - 4px); /* adjust radius to fit inside */
   z-index: -1;
-  transition: background-color 0.3s ease, background-image 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    background-image 0.3s ease;
 }
 
 /* Hover state: solid secondary color instead of stripes */
