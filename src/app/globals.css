@@ -63,7 +63,10 @@ h6 {
   );
 }
 .dotted-bg {
-  background-image: radial-gradient(#aadcec 1.5px, transparent 1.5px);
+  background-image: radial-gradient(
+    var(--color-secondary) 1.5px,
+    transparent 1.5px
+  );
   background-size: 7px 7px; /* space between dots */
 }
 .btn-striped-layered {
@@ -90,8 +93,8 @@ h6 {
   bottom: 4px;
   background-image: repeating-linear-gradient(
     45deg,
-    #aadcec 0,
-    #aadcec 2px,
+    var(--color-secondary) 0,
+    var(--color-secondary) 2px,
     transparent 2px,
     transparent 8px
   );

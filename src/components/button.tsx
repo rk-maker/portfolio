@@ -16,7 +16,7 @@ export default function StripedButton({
         className={`
           absolute inset-0 translate-x-1 translate-y-1 rounded-lg transition-all duration-300
           bg-[length:12px_12px]
-          bg-[repeating-linear-gradient(45deg,#aadcec_0,#aadcec_2px,transparent_2px,transparent_8px)]
+          bg-[repeating-linear-gradient(45deg,var(--color-secondary)_0,var(--color-secondary)_2px,transparent_2px,transparent_8px)]
           group-hover:bg-[var(--color-secondary)]
           group-hover:bg-none
         `}
