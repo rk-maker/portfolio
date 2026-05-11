@@ -19,7 +19,19 @@
   --color-thirdy: #7f15e9;
   --color-primary-hover: #7f15e9;
   --color-font: #0f1b61;
+  --color-shadow: white;
 }
+
+.dark {
+  --color-primary: #100e1a;
+  --color-secondary: #1a1629;
+  --color-thirdy: #7f15e9;
+  --color-primary-hover: #9d4edd;
+  --color-primary-light: rgba(127, 21, 233, 0.15);
+  --color-font: #ede9fc;
+  --color-shadow: #100e1a;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -44,8 +56,8 @@ h6 {
 .hover-striped-bg {
   background-image: repeating-linear-gradient(
     45deg,
-    #aadcec 0,
-    #aadcec 2px,
+    var(--color-secondary) 0,
+    var(--color-secondary) 2px,
     transparent 0px,
     transparent 8px
   );

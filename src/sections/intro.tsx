@@ -132,8 +132,8 @@ export default function IntroSection() {
                 y: imageY,
                 backgroundImage: `repeating-linear-gradient(
           45deg,
-          #aadcec 0,
-          #aadcec 2px,
+          var(--color-secondary) 0,
+          var(--color-secondary) 2px,
           transparent 0px,
           transparent 8px
         )`,

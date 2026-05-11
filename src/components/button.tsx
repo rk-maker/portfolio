@@ -33,7 +33,7 @@ export default function StripedButton({
         <p
           className="
             font-bold text-[var(--color-thirdy)] transition-all duration-300
-            group-hover:[text-shadow:2px_2px_white]
+            group-hover:[text-shadow:2px_2px_var(--color-shadow)]
           "
         >
           {children}

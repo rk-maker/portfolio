@@ -6,6 +6,7 @@ import StackedIcon from "./shadowIcon";
 import { IoChatbubbleOutline, IoChatbubbleSharp } from "react-icons/io5";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import ThemeToggle from "./theme-toggle";
 
 const Navbar = () => {
   const router = useRouter();
@@ -37,7 +38,8 @@ const Navbar = () => {
         </motion.div>
       </div>
 
-      <span className="flex">
+      <span className="flex items-center gap-4">
+        <ThemeToggle />
         <StackedIcon
           OutlineIcon={IoChatbubbleOutline}
           FilledIcon={IoChatbubbleSharp}

@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-dmsans text-font">
         {/* Universal border */}
-        <div className="fixed inset-0 border-[20px] border-white pointer-events-none z-50"></div>
+        <div className="fixed inset-0 border-[20px] border-primary pointer-events-none z-50"></div>
 
         {/* Outer container */}
         <div

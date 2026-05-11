@@ -64,7 +64,7 @@ export function ProjectCard({
 
   const photos = useMemo(
     () => (Array.isArray(media.src) ? media.src : [media.src]),
-    [media.src]
+    [media.src],
   );
   const nextPhoto = () => {
     setCurrentPhotoIndex((prev) => (prev + 1) % photos.length);
@@ -93,9 +93,9 @@ export function ProjectCard({
                 <div className="relative w-[560px] h-[315px] rounded-lg">
                   {/* Skeleton Loader */}
                   {loading && (
-                    <div className="absolute inset-0 animate-pulse bg-gray-300 rounded-lg flex items-center justify-center">
+                    <div className="absolute inset-0 animate-pulse bg-secondary rounded-lg flex items-center justify-center">
                       <svg
-                        className="w-12 h-12 text-gray-500"
+                        className="w-12 h-12 text-font"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -171,7 +171,7 @@ export function ProjectCard({
           >
             <div className="space-y-8">
               <div>
-                <h3 className="text-4xl md:text-5xl font-bold text-[#0f1b61] mb-4">
+                <h3 className="text-4xl md:text-5xl font-bold text-font mb-4">
                   {title}
                 </h3>
               </div>
@@ -182,9 +182,7 @@ export function ProjectCard({
                 ))}
               </div>
 
-              <p className="text-[#0f1b61] leading-relaxed text-lg">
-                {description}
-              </p>
+              <p className="text-font leading-relaxed text-lg">{description}</p>
 
               <div className="flex flex-wrap gap-4">
                 {links.live && <StripedButton>Live Demo</StripedButton>}
@@ -201,13 +199,13 @@ export function ProjectCard({
         </div>
 
         {isExpanded && (detailedDescription || features) && (
-          <div className="mt-12 pt-8 border-t-2 border-[#aee1f5] animate-in slide-in-from-top-2 duration-300">
+          <div className="mt-12 pt-8 border-t-2 border-secondary animate-in slide-in-from-top-2 duration-300">
             {detailedDescription && (
               <div className="mb-8">
-                <h4 className="text-2xl font-semibold text-[#0f1b61] mb-4">
+                <h4 className="text-2xl font-semibold text-font mb-4">
                   Project Details
                 </h4>
-                <p className="text-[#0f1b61] leading-relaxed text-lg">
+                <p className="text-font leading-relaxed text-lg">
                   {detailedDescription}
                 </p>
               </div>
@@ -215,16 +213,16 @@ export function ProjectCard({
 
             {features && features.length > 0 && (
               <div>
-                <h4 className="text-2xl font-semibold text-[#0f1b61] mb-4">
+                <h4 className="text-2xl font-semibold text-font mb-4">
                   Key Features
                 </h4>
                 <ul className="space-y-3">
                   {features.map((feature, index) => (
                     <li
                       key={index}
-                      className="text-[#0f1b61] flex items-start text-lg"
+                      className="text-font flex items-start text-lg"
                     >
-                      <span className="w-3 h-3 bg-[#7f15e9] rounded-full mt-2 mr-4 flex-shrink-0"></span>
+                      <span className="w-3 h-3 bg-thirdy rounded-full mt-2 mr-4 flex-shrink-0"></span>
                       {feature}
                     </li>
                   ))}
