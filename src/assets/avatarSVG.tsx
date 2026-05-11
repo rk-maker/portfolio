@@ -69,7 +69,7 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
         rawX.set(e.clientX);
       });
     },
-    [width, height, rawX, y, x]
+    [width, height, rawX, y, x],
   );
 
   useEffect(() => {
@@ -98,13 +98,21 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
           ".st0{fill:#F4F9FC;}\r\n\t.st1{fill:#AEE1F5;}\r\n\t.st2{fill:#FFFFFF;}\r\n\t.st3{fill:none;stroke:#7F15E9;stroke-width:14;stroke-miterlimit:10;}\r\n\t.st4{fill:none;stroke:#7F15E9;stroke-width:14;stroke-linecap:round;stroke-miterlimit:10;}\r\n\t.st5{fill:none;stroke:#7F16EC;stroke-width:14;stroke-miterlimit:10;}\r\n\t.st6{fill:none;stroke:#7F16EC;stroke-width:14;stroke-linecap:round;stroke-miterlimit:10;}\r\n\t.st7{fill:none;stroke:#7F00E0;stroke-width:14;stroke-miterlimit:10;}\r\n\t.st8{fill:#7F16EC;}\r\n\t.st9{fill:#7F15E9;}"
         }
       </style>
-      <g id="Layer_12">
+      <motion.g
+        id="head_1_"
+        style={{ rotate: headRotate, originX: 0.5, originY: 1 }}
+      >
         <polygon
           className="st0"
           points="1321,-667.5 1149.5,-639.4 1141,-625.5 1127.6,-608.9 948.3,-500.3 941.9,-463.3 880.2,-373.1  853.7,-252.5 852.9,-113.2 870.8,-31.3 890.5,45.9 873.2,33.1 853.7,48.4 845.2,73.3 854.4,116 868.9,164.4 877.1,198.1  876.1,226.9 871.9,255 875.3,287.8 888.2,305 919.6,292.4 927.6,290.7 948.8,356.4 956.1,400.8 980.1,449 1029.5,525.9  1083.1,589.4 1109.1,616.5 1119.8,663.8 1132.1,771.9 1143.5,867.6 1143.2,880.7 1166.2,897.2 1220.8,919.5 1324.8,934.1  1414.6,919.8 1482.8,880.6 1486.9,838.2 1499.8,723.4 1517.4,641.5 1514.1,608.5 1576.1,537.1 1658.6,383.7 1671.4,335.4  1680.2,299 1701,303.9 1728.1,302.4 1736.1,278.4 1732.8,219.3 1742.1,159.6 1766.6,82.8 1761.3,51.6 1733.7,24.4 1741.8,-28.3  1756.2,-134.3 1756.5,-253 1756,-277.6 1766.2,-289.4 1728.4,-387.7 1722.9,-397.6 1744.9,-398.5 1714.1,-454.3 1653.9,-502  1617.4,-522.7 1604.1,-584.3 1574.5,-619.4 1560.8,-625 1569.4,-595 1500.2,-655.6 1428.8,-695.6 1420.8,-695.6 1428.1,-680.3  "
         />
-      </g>
-      <g id="Layer_13">
+      </motion.g>
+
+      <motion.g
+        // id="Layer_13"
+        id="head_1_"
+        style={{ rotate: headRotate, originX: 0.5, originY: 1 }}
+      >
         <path
           id="XMLID_100_"
           className="st0"
@@ -115,7 +123,7 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
           className="st0"
           d="M1504.1,676.2c0,0,210.4-200.8,203.7-341.8c0,0,84.3-1.1,41-115.7c0,0,88.7-170.6,34.3-214.1 c0,0,30.8-208-16.5-327.5C1766.7-322.9,1139.3,113.2,1504.1,676.2z"
         />
-      </g>
+      </motion.g>
       <g id="cloth">
         <path
           className="st1"
@@ -268,7 +276,7 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
                 "M1502.5,348.3c-118.4,54.3-260.7,51.5-377.8-5.6c-10.1-4.9-28.2-21.7-5.5-17.5c14.6,2.7,29.2,8.5,43.7,12 c62.9,15,128.1,22.5,192.8,19.8c44-1.8,88-8.6,130-21.9c5.7-1.8,38.5-17.8,39.9-8.6C1526.5,332.2,1507.3,346,1502.5,348.3z",
                 // Right position - right side smirks
                 "M1502.5,348.3c-118.4,54.3-260.7,51.5-377.8-5.6c-10.1-4.9-18.2-11.7-5.5-17.5c14.6,2.7,29.2,8.5,43.7,12 c62.9,15,128.1,22.5,192.8,19.8c44-1.8,88-8.6,130-21.9c5.7-1.8,48.5-7.8,39.9-8.6C1526.5,332.2,1507.3,346,1502.5,348.3z",
-              ]
+              ],
             )}
             style={{
               // Only CSS properties here
