@@ -22,6 +22,19 @@ export const project = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "projectType",
+      title: "Project Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Web App", value: "Web App" },
+          { title: "Mobile App", value: "Mobile App" },
+          { title: "Other", value: "Other" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "shortDescription",
       title: "Short description",
       type: "text",

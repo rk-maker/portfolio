@@ -9,6 +9,8 @@ import { useState, useEffect } from "react";
 interface ProjectCardData {
   title: string;
   description: string;
+  projectType: string;
+  publishedYear: string;
   technologies: string[];
   media: {
     type: "video" | "photos";
@@ -36,6 +38,8 @@ export default function ProjectsSection() {
       const query = `*[_type == "project"] | order(order asc) {
         title,
         shortDescription,
+        projectType,
+        publishedAt,
         technologies,
         links,
         features,
@@ -97,6 +101,10 @@ export default function ProjectsSection() {
           return {
             title: item.title,
             description: item.shortDescription,
+            projectType: item.projectType ?? "Project",
+            publishedYear: item.publishedAt
+              ? new Date(item.publishedAt).getFullYear().toString()
+              : "TBD",
             technologies: item.technologies ?? [],
             links: item.links ?? {},
             features: item.features ?? [],
@@ -153,6 +161,8 @@ Dive in to see how I turn ideas into functional, well-engineered solutions."
             <div key={index}>
               <ProjectCard
                 title={project.title}
+                projectType={project.projectType}
+                publishedYear={project.publishedYear}
                 description={project.description}
                 technologies={project.technologies}
                 media={project.media}

@@ -7,7 +7,7 @@ type BadgeProps = {
 
 const Badge: React.FC<BadgeProps> = ({ label }) => {
   return (
-    <span className="font-bold underline text-m decoration-thirdy">
+    <span className="inline-flex items-center rounded-full border border-[var(--color-thirdy)] px-2 py-0.5  text-sm text-[var(--color-thirdy)]">
       {label}
     </span>
   );

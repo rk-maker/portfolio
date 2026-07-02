@@ -2,11 +2,13 @@ import React, { ReactNode, MouseEventHandler } from "react";
 
 type StripedButtonProps = {
   children: ReactNode;
+  icon?: ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 export default function StripedButton({
   children,
+  icon,
   onClick,
 }: StripedButtonProps) {
   return (
@@ -26,18 +28,23 @@ export default function StripedButton({
       <button
         onClick={onClick}
         className="
-          relative z-10 border-3 border-[var(--color-thirdy)] rounded-lg 
+          relative z-10 inline-flex items-center gap-2 border-3 border-[var(--color-thirdy)] rounded-lg 
           bg-transparent px-6 py-2 transition-all duration-300
         "
       >
-        <p
+        {icon ? (
+          <span className="inline-flex items-center justify-center text-[var(--color-thirdy)]">
+            {icon}
+          </span>
+        ) : null}
+        <span
           className="
             font-bold text-[var(--color-thirdy)] transition-all duration-300
             group-hover:[text-shadow:2px_2px_white]
           "
         >
           {children}
-        </p>
+        </span>
       </button>
     </div>
   );
