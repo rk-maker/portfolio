@@ -1,8 +1,9 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Badge from "./badge";
 import StripedButton from "./button";
 import Image from "next/image";
 import { GoArrowRight, GoArrowUpRight } from "react-icons/go";
+import { VscChromeClose } from "react-icons/vsc";
 
 interface ProjectCardProps {
   title: string;
@@ -12,8 +13,7 @@ interface ProjectCardProps {
   description: string;
   technologies: string[];
   media: {
-    type: "video" | "photos";
-    src: string | string[]; // Support array of images for photos
+    src: string | string[];
     alt?: string;
   };
   links: {
@@ -63,16 +63,12 @@ export function ProjectCard({
   index,
 }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const isMobileApp = projectType.trim().toLowerCase() === "mobile app";
 
   const photos = useMemo(
     () => (Array.isArray(media.src) ? media.src : [media.src]),
     [media.src],
   );
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 3000); // 3s fallback
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className={`py-16 ${className}`}>
@@ -84,41 +80,14 @@ export function ProjectCard({
               index % 2 === 0 ? "order-1 md:order-1" : "order-1 md:order-2"
             }
           >
-            <div className={`flex items-center justify-center`}>
-              {media.type === "video" ? (
-                <div className="relative w-[560px] h-[315px] rounded-lg">
-                  {/* Skeleton Loader */}
-                  {loading && (
-                    <div className="absolute inset-0 animate-pulse bg-gray-300 rounded-lg flex items-center justify-center">
-                      <svg
-                        className="w-12 h-12 text-gray-500"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M6 4l12 6-12 6V4z" />
-                      </svg>
-                    </div>
-                  )}
-                  <iframe
-                    width="560"
-                    height="315"
-                    src={media.src as string}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    style={{ borderRadius: "0.5rem" }}
-                    onLoad={() => setLoading(false)}
-                  ></iframe>
-                </div>
-              ) : (
-                <div className="w-full overflow-x-auto rounded-3xl border border-slate-200 bg-slate-50 shadow-sm">
+            <div className="flex items-center justify-center">
+              {isMobileApp ? (
+                <div className="w-full overflow-x-auto rounded-2xl   bg-secondary/10 shadow-sm">
                   <div className="flex snap-x snap-mandatory gap-2 px-4 py-4">
                     {photos.map((photo, photoIndex) => (
                       <div
                         key={photoIndex}
-                        className="w-40 sm:w-50 shrink-0  snap-center rounded-3xl overflow-hidden"
+                        className="w-40 sm:w-50 shrink-0 snap-center overflow-hidden rounded-3xl"
                       >
                         <div className="relative h-80 w-50">
                           <Image
@@ -133,6 +102,18 @@ export function ProjectCard({
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm">
+                  <div className="relative aspect-5/3 w-full">
+                    <Image
+                      src={photos[0] || "/placeholder.svg"}
+                      alt={media.alt || title}
+                      fill
+                      className="object-fill"
+                      sizes="(max-width: 768px) 100vw, 640px"
+                    />
                   </div>
                 </div>
               )}
@@ -199,15 +180,15 @@ export function ProjectCard({
             onClick={() => setIsModalOpen(false)}
           >
             <div
-              className="relative w-full max-w-7xl max-h-[90vh] overflow-hidden rounded-[2rem] bg-white shadow-2xl"
+              className="relative w-full max-w-7xl max-h-[90vh] overflow-hidden rounded-4xl bg-white shadow-2xl"
               onClick={(event) => event.stopPropagation()}
             >
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="absolute right-4 top-4 z-10 rounded-full border border-slate-200 bg-white px-3 py-1 text-3xl font-light text-font shadow-sm transition hover:bg-slate-100"
+                className="absolute right-4 top-4 z-10 rounded-full   hover:bg-secondary px-2 py-2 text-3xl  text-font  transition"
               >
-                ×
+                <VscChromeClose className="text-thirdy size-7" />
               </button>
 
               <div className="flex h-full max-h-[90vh] flex-col overflow-hidden">
@@ -219,26 +200,12 @@ export function ProjectCard({
                 </div>
                 <div className="grid flex-1 min-h-0 grid-cols-1 overflow-hidden md:grid-cols-[1.4fr_0.8fr]">
                   <div className="overflow-y-auto px-6 py-6 pb-10">
-                    {media.type === "video" ? (
-                      <div className="relative w-full h-[320px] rounded-3xl overflow-hidden bg-slate-100">
-                        <iframe
-                          width="100%"
-                          height="100%"
-                          src={media.src as string}
-                          title={title}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          referrerPolicy="strict-origin-when-cross-origin"
-                          allowFullScreen
-                          style={{ borderRadius: "0.75rem" }}
-                        ></iframe>
-                      </div>
-                    ) : (
-                      <div className="flex h-[320px] gap-2 overflow-x-auto snap-x snap-mandatory rounded-3xl">
+                    {isMobileApp ? (
+                      <div className="flex h-80 gap-2 overflow-x-auto snap-x snap-mandatory rounded-3xl">
                         {photos.map((photo, photoIndex) => (
                           <div
                             key={photoIndex}
-                            className="w-40 sm:w-50 shrink-0  snap-center rounded-3xl overflow-hidden"
+                            className="w-40 sm:w-50 shrink-0 snap-center overflow-hidden rounded-3xl"
                           >
                             <div className="relative h-80 w-50">
                               <Image
@@ -254,6 +221,16 @@ export function ProjectCard({
                             </div>
                           </div>
                         ))}
+                      </div>
+                    ) : (
+                      <div className="relative h-80 overflow-hidden rounded-4xl bg-slate-100">
+                        <Image
+                          src={photos[0] || "/placeholder.svg"}
+                          alt={media.alt || title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 900px"
+                        />
                       </div>
                     )}
 

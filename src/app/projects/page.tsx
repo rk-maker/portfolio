@@ -13,7 +13,6 @@ interface ProjectCardData {
   publishedYear: string;
   technologies: string[];
   media: {
-    type: "video" | "photos";
     src: string | string[];
     alt?: string;
   };
@@ -32,26 +31,6 @@ export default function ProjectsSection() {
   const [projects, setProjects] = useState<ProjectCardData[]>([]);
 
   const projectSectionControl = useAnimation();
-
-  // Convert YouTube URLs to embed format
-  const convertYouTubeToEmbed = (url: string): string => {
-    if (!url) return url;
-
-    // Handle watch?v= format
-    const watchMatch = url.match(
-      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
-    );
-    if (watchMatch) {
-      return `https://www.youtube.com/embed/${watchMatch[1]}`;
-    }
-
-    // If already in embed format, return as-is
-    if (url.includes("youtube.com/embed/")) {
-      return url;
-    }
-
-    return url;
-  };
 
   useEffect(() => {
     async function loadProjects() {
@@ -83,27 +62,16 @@ export default function ProjectsSection() {
                 mediaItem.type === "image" && mediaItem.imageUrl,
             )
             .map((mediaItem: any) => mediaItem.imageUrl);
-          const videoItem = (item.media ?? []).find(
-            (mediaItem: any) =>
-              mediaItem.type === "video" && mediaItem.videoUrl,
-          );
 
-          const media = videoItem
-            ? {
-                type: "video" as const,
-                src: convertYouTubeToEmbed(videoItem.videoUrl),
-                alt: videoItem.altText,
-              }
-            : {
-                type: "photos" as const,
-                src:
-                  images.length > 1
-                    ? images
-                    : images.length === 1
-                      ? images[0]
-                      : "/placeholder.svg",
-                alt: item.media?.[0]?.altText,
-              };
+          const media = {
+            src:
+              images.length > 1
+                ? images
+                : images.length === 1
+                  ? images[0]
+                  : "/placeholder.svg",
+            alt: item.media?.[0]?.altText,
+          };
 
           const detailedDescription = Array.isArray(item.detailedDescription)
             ? item.detailedDescription

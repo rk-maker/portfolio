@@ -6,8 +6,7 @@ export const projects = [
       "Built the entire frontend from scratch, from designing reusable components to deploying the app. It’s a secure and reliable online banking platform used by millions every day, handling high traffic smoothly and ensuring a seamless user experience across all devices.",
     technologies: ["React", "TypeScript", "Springboot", "Mysql", "JAVA"],
     media: {
-      type: "video" as const,
-      src: "/nbp-app-asset/nbpIB.mp4",
+      src: "/nbp-app-asset/Login.png",
       alt: "E-Commerce Platform Demo",
     },
     links: {
@@ -38,7 +37,6 @@ export const projects = [
       "Biometric Auth",
     ],
     media: {
-      type: "photos" as const,
       src: [
         "/nbp-app-asset/Login.png",
         "/nbp-app-asset/card-manag.png",
@@ -69,7 +67,6 @@ export const projects = [
       "PayApp, the ultimate payment solution designed exclusively for your local kirana stores. We bridge the gap between traditional shopping and modern convenience, making every transaction swift, secure, and seamless.",
     technologies: ["React", "Chart.js", "Weather API", "CSS Grid", "PWA"],
     media: {
-      type: "photos" as const,
       src: [
         "/pay-app-asset/main-menu.png",
         "/pay-app-asset/tran-summary.png",
