@@ -33,6 +33,26 @@ export default function ProjectsSection() {
 
   const projectSectionControl = useAnimation();
 
+  // Convert YouTube URLs to embed format
+  const convertYouTubeToEmbed = (url: string): string => {
+    if (!url) return url;
+
+    // Handle watch?v= format
+    const watchMatch = url.match(
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+    );
+    if (watchMatch) {
+      return `https://www.youtube.com/embed/${watchMatch[1]}`;
+    }
+
+    // If already in embed format, return as-is
+    if (url.includes("youtube.com/embed/")) {
+      return url;
+    }
+
+    return url;
+  };
+
   useEffect(() => {
     async function loadProjects() {
       const query = `*[_type == "project"] | order(order asc) {
@@ -71,7 +91,7 @@ export default function ProjectsSection() {
           const media = videoItem
             ? {
                 type: "video" as const,
-                src: videoItem.videoUrl,
+                src: convertYouTubeToEmbed(videoItem.videoUrl),
                 alt: videoItem.altText,
               }
             : {
