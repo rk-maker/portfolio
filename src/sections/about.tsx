@@ -1,22 +1,22 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SectionHeader from "@/components/sectionHeader";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { motion, useAnimation, Variants } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { client } from "@/sanity/lib/client";
 
 const date = new Date();
-const socialIcons = [
-  { name: "Twitter", icon: FaTwitter, url: "https://x.com/Rk_raffay" },
-  { name: "GitHub", icon: FaGithub, url: "https://github.com/rk-maker" },
-  {
-    name: "LinkedIn",
-    icon: FaLinkedin,
-    url: "https://www.linkedin.com/in/muhammad-raffay-khan-58b3ba177/",
-  },
-  { name: "Mail", icon: IoMdMail, url: "#" },
-];
+
+interface ContactInfoData {
+  email?: string;
+  phoneNumber?: string;
+  linkedinUrl?: string;
+  githubUrl?: string;
+  mailToUrl?: string;
+  twitterUrl?: string;
+}
 
 const socialVariants: Variants = {
   hidden: {
@@ -38,6 +38,14 @@ export default function AboutSection() {
   const [lineRef, inView] = useInView({
     threshold: 0.7,
     triggerOnce: true,
+  });
+  const [contactInfo, setContactInfo] = useState<ContactInfoData>({
+    email: "m.raffaykhan@outlook.com",
+    phoneNumber: "(+49)-15567060036",
+    linkedinUrl: "https://www.linkedin.com/in/muhammad-raffay-khan-58b3ba177/",
+    githubUrl: "https://github.com/rk-maker",
+    mailToUrl: "mailto:m.raffaykhan@outlook.com",
+    twitterUrl: "https://x.com/Rk_raffay",
   });
   const socialIconsControls = useAnimation();
   const aboutElementsAnimationControls = useAnimation();
@@ -67,6 +75,30 @@ export default function AboutSection() {
     sequence();
   }, [socialIconsControls, aboutElementsAnimationControls, inView]);
 
+  useEffect(() => {
+    async function loadContactInfo() {
+      const query = `*[_type == "contactInfo"][0]{
+        email,
+        phoneNumber,
+        linkedinUrl,
+        githubUrl,
+        mailToUrl,
+        twitterUrl
+      }`;
+
+      try {
+        const data = await client.fetch<ContactInfoData>(query);
+        if (data) {
+          setContactInfo((current) => ({ ...current, ...data }));
+        }
+      } catch (error) {
+        console.error("Failed to load contact info:", error);
+      }
+    }
+
+    loadContactInfo();
+  }, []);
+
   // const handleResumeDownload = () => {
   //   const link = document.createElement("a");
   //   link.href =
@@ -76,6 +108,21 @@ export default function AboutSection() {
   //   link.click();
   //   document.body.removeChild(link);
   // };
+
+  const socialIcons = [
+    { name: "Twitter", icon: FaTwitter, url: contactInfo.twitterUrl ?? "#" },
+    { name: "GitHub", icon: FaGithub, url: contactInfo.githubUrl ?? "#" },
+    {
+      name: "LinkedIn",
+      icon: FaLinkedin,
+      url: contactInfo.linkedinUrl ?? "#",
+    },
+    {
+      name: "Mail",
+      icon: IoMdMail,
+      url: contactInfo.mailToUrl ?? `mailto:${contactInfo.email ?? ""}`,
+    },
+  ];
 
   return (
     <section
@@ -133,10 +180,13 @@ export default function AboutSection() {
                 <span className="text-sm text-font">Email</span>
                 <div>
                   <a
-                    href="mailto:hello@example.com"
+                    href={
+                      contactInfo.mailToUrl ??
+                      `mailto:${contactInfo.email ?? ""}`
+                    }
                     className="transition-colors text-thirdy hover:text-font"
                   >
-                    m.raffaykhan@outlook.com
+                    {contactInfo.email ?? "m.raffaykhan@outlook.com"}
                   </a>
                 </div>
               </motion.div>
@@ -149,10 +199,10 @@ export default function AboutSection() {
                 <span className="text-sm text-font">Phone</span>
                 <div>
                   <a
-                    href="tel:+4915567060036"
+                    href={`tel:${contactInfo.phoneNumber ?? "+4915567060036"}`}
                     className="transition-colors text-thirdy hover:text-font"
                   >
-                    (+49)-15567060036
+                    {contactInfo.phoneNumber ?? "(+49)-15567060036"}
                   </a>
                 </div>
               </motion.div>
