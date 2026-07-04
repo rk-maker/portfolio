@@ -87,45 +87,46 @@ export default function ProjectsSection() {
       className="h-screen w-full justify-center items-center "
     >
       <div className="flex w-full h-full items-center" ref={lineRef}>
+        {/* Left half: Content  */}
         <motion.div
           className="w-1/2  flex flex-col items-end justify-end"
           style={{ y: leftColumnY }}
         >
-          <SectionHeader
-            heading="What I've Built"
-            description={
-              <span>
-                From frontend interfaces to backend logic, I focus on crafting
-                projects that are both functional and user-friendly, ensuring
-                every detail contributes to a seamless experience. On the
-                frontend, I design intuitive, responsive, and visually engaging
-                applications that prioritize usability and accessibility. <br />
-                <br />
-                On the backend, I develop reliable architectures and efficient
-                workflows that bring these interfaces to life, combining
-                performance with scalability. By bridging design with technical
-                precision, I create solutions that not only work smoothly but
-                also leave a lasting impact on the people who use them.
-              </span>
-            }
-            onAnimationComplete={() => {
-              setPrevAnimation(true);
-            }}
-            width="large"
-            animated={false}
-          />
-          <motion.div
-            className="py-4 flex self-center -translate-x-[115px]"
-            // variants={projectElementsAnimation}
-            // // initial="hidden"
-            // animate={projectElementsAnimationControls}
-            // custom={0}
-          >
-            <StripedButton onClick={handleClick}>
-              Checkout all Projects
-            </StripedButton>
-          </motion.div>
+          <div className="w-6/7  items-start justify-end">
+            <SectionHeader
+              heading="What I've Built"
+              width="full"
+              animated={false}
+              description={
+                <span>
+                  From frontend interfaces to backend logic, I focus on crafting
+                  projects that are both functional and user-friendly, ensuring
+                  every detail contributes to a seamless experience. On the
+                  frontend, I design intuitive, responsive, and visually
+                  engaging applications that prioritize usability and
+                  accessibility. <br />
+                  On the backend, I develop reliable architectures and efficient
+                  workflows that bring these interfaces to life, combining
+                  performance with scalability. By bridging design with
+                  technical precision, I create solutions that not only work
+                  smoothly but also leave a lasting impact on the people who use
+                  them.
+                </span>
+              }
+              onAnimationComplete={() => {
+                setPrevAnimation(true);
+              }}
+            />
+
+            <motion.div className="py-4 flex w-4/5 justify-start">
+              <StripedButton onClick={handleClick}>
+                Checkout all Projects
+              </StripedButton>
+            </motion.div>
+          </div>
         </motion.div>
+
+        {/* Right half: SVG  */}
         <motion.div
           className="w-1/2 flex items-center justify-center "
           style={{ y: rightColumnY }}
@@ -136,7 +137,7 @@ export default function ProjectsSection() {
             initial="hidden"
             animate={inView ? "show" : "hidden"}
           >
-            <div className="relative w-70 h-70 md:w-[400px] md:h-[400px]">
+            <div className="relative w-70 h-70 md:w-100 md:h-100">
               {/* Circle in background */}
               <motion.div
                 id="rounded"

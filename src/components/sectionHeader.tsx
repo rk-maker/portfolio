@@ -10,7 +10,7 @@ type SectionHeaderProps = {
   align?: "left" | "center" | "right";
   headingSize?: "lg" | "xl";
   descriptionSize?: "small" | "medium" | "large";
-  width?: "small" | "medium" | "large";
+  width?: "small" | "medium" | "large" | "full";
   animated?: boolean; // NEW: controls animation + line
   onAnimationComplete?: () => void;
 };
@@ -30,6 +30,7 @@ const widthMap = {
   small: "w-2/5",
   medium: "w-3/5",
   large: "w-4/5",
+  full: "w-full",
 };
 
 const lineVariants: Variants = {
