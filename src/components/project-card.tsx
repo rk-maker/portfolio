@@ -176,7 +176,7 @@ export function ProjectCard({
 
         {isModalOpen && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4 py-4 sm:py-6"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-thirdy/2 backdrop-blur-sm px-4 py-4 sm:py-6"
             onClick={() => setIsModalOpen(false)}
           >
             <div

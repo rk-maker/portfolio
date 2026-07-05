@@ -1,15 +1,17 @@
-import React, { ReactNode, MouseEventHandler } from "react";
+import React, { ButtonHTMLAttributes, ReactNode } from "react";
 
 type StripedButtonProps = {
   children: ReactNode;
   icon?: ReactNode;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function StripedButton({
   children,
   icon,
-  onClick,
+  className = "",
+  disabled = false,
+  type = "button",
+  ...props
 }: StripedButtonProps) {
   return (
     <div className="relative inline-block group">
@@ -26,11 +28,15 @@ export default function StripedButton({
 
       {/* Button */}
       <button
-        onClick={onClick}
-        className="
+        type={type}
+        disabled={disabled}
+        className={`
           relative z-10 inline-flex items-center gap-1 border-3 border-(--color-thirdy) rounded-lg 
           bg-transparent px-4 py-1 transition-all duration-300
-        "
+          ${disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}
+          ${className}
+        `}
+        {...props}
       >
         <span
           className="
@@ -41,7 +47,7 @@ export default function StripedButton({
           {children}
         </span>
         {icon ? (
-          <span className="inline-flex items-center justify-center text-[var(--color-thirdy)]">
+          <span className="inline-flex items-center justify-center text-(--color-thirdy)">
             {icon}
           </span>
         ) : null}
