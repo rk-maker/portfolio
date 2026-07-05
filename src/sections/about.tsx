@@ -260,7 +260,7 @@ export default function AboutSection() {
                 href={isEmail ? `mailto:${icon.url}` : icon.url}
                 target={isEmail ? undefined : "_blank"} // add this line
                 rel={isEmail ? undefined : "noopener noreferrer"}
-                className="mr-15 text-lg text-font hover:text-thirdy transition-colors duration-300"
+                className="mr-15 text-xl text-font hover:text-thirdy transition-colors duration-300"
                 custom={i}
                 variants={socialVariants}
                 initial="hidden"
