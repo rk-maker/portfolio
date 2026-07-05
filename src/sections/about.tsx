@@ -186,7 +186,7 @@ export default function AboutSection() {
         templateId,
         {
           from_name: formData.name,
-          user_email: formData.email,
+          email: formData.email,
           reason: trimmedReason,
         },
         publicKey,

@@ -4,6 +4,8 @@ import StripedButton from "./button";
 import Image from "next/image";
 import { GoArrowRight, GoArrowUpRight } from "react-icons/go";
 import { VscChromeClose } from "react-icons/vsc";
+import { FiGithub } from "react-icons/fi";
+import { VscGithubAlt } from "react-icons/vsc";
 
 interface ProjectCardProps {
   title: string;
@@ -156,7 +158,8 @@ export function ProjectCard({
                 )}
                 {links.github && (
                   <StripedButton
-                    icon={<GoArrowUpRight className="stroke-tirdy stroke-2" />}
+                    icon={<VscGithubAlt className="stroke-tirdy stroke-2" />}
+                    onClick={() => window.open(links.github, "_blank")}
                   >
                     Git repo
                   </StripedButton>
@@ -274,7 +277,7 @@ export function ProjectCard({
                           {links.github && (
                             <StripedButton
                               icon={
-                                <GoArrowUpRight className="stroke-tirdy stroke-2" />
+                                <VscGithubAlt className="stroke-tirdy stroke-2" />
                               }
                               onClick={() =>
                                 window.open(links.github, "_blank")
