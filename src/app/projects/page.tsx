@@ -2,21 +2,122 @@
 import { ProjectCard } from "@/components/project-card";
 import { ScrollIndicator } from "@/components/scrollIndeicator";
 import SectionHeader from "@/components/sectionHeader";
-import { projects } from "@/Helper/project";
+import { client } from "@/sanity/lib/client";
 import { useAnimation } from "framer-motion";
 import { useState, useEffect } from "react";
+
+interface ProjectCardData {
+  title: string;
+  description: string;
+  projectType: string;
+  publishedYear: string;
+  technologies: string[];
+  media: {
+    src: string | string[];
+    alt?: string;
+  };
+  links: {
+    live?: string;
+    github?: string;
+    demo?: string;
+  };
+  detailedDescription?: string;
+  features?: string[];
+}
 
 export default function ProjectsSection() {
   const [prevAnimation, setPrevAnimation] = useState(false);
   const [startScrollAnimate, setStartScrollAnimate] = useState(false);
+  const [projects, setProjects] = useState<ProjectCardData[]>([]);
 
   const projectSectionControl = useAnimation();
+
+  useEffect(() => {
+    async function loadProjects() {
+      const query = `*[_type == "project"] | order(order asc) {
+        title,
+        shortDescription,
+        projectType,
+        publishedAt,
+        technologies,
+        links,
+        features,
+        detailedDescription,
+        media[]{
+          type,
+          altText,
+          caption,
+          videoUrl,
+          "imageUrl": image.asset->url
+        }
+      }`;
+
+      try {
+        const data = await client.fetch(query);
+
+        const normalized = (data ?? []).map((item: any) => {
+          const images = (item.media ?? [])
+            .filter(
+              (mediaItem: any) =>
+                mediaItem.type === "image" && mediaItem.imageUrl,
+            )
+            .map((mediaItem: any) => mediaItem.imageUrl);
+
+          const media = {
+            src:
+              images.length > 1
+                ? images
+                : images.length === 1
+                  ? images[0]
+                  : "/placeholder.svg",
+            alt: item.media?.[0]?.altText,
+          };
+
+          const detailedDescription = Array.isArray(item.detailedDescription)
+            ? item.detailedDescription
+                .map((block: any) =>
+                  Array.isArray(block.children)
+                    ? block.children
+                        .map((child: any) => child.text || "")
+                        .join("")
+                    : "",
+                )
+                .filter(Boolean)
+                .join("\n\n")
+            : undefined;
+
+          return {
+            title: item.title,
+            description: item.shortDescription,
+            projectType: item.projectType ?? "Project",
+            publishedYear: item.publishedAt
+              ? new Date(item.publishedAt).getFullYear().toString()
+              : "TBD",
+            technologies: item.technologies ?? [],
+            links: item.links ?? {},
+            features: item.features ?? [],
+            detailedDescription,
+            media,
+          };
+        });
+
+        setProjects(normalized);
+        console.log("Loaded projects:", normalized);
+      } catch (error) {
+        console.error("Failed to load Sanity projects:", error);
+      }
+    }
+
+    loadProjects();
+  }, []);
+
   useEffect(() => {
     if (prevAnimation) {
       Promise.resolve(setStartScrollAnimate(true));
       projectSectionControl.start("visible");
     }
   }, [projectSectionControl, prevAnimation]);
+
   return (
     <>
       <div className="max-w-7xl mx-auto">
@@ -43,12 +144,13 @@ Dive in to see how I turn ideas into functional, well-engineered solutions."
           </div>
         </div>
         {/* Projects List - each project is now a full section */}
-        <div className="divide-y-2 divide-[#aee1f5]/30">
+        <div className="divide-y-2 divide-secondary/30">
           {projects.map((project, index) => (
             <div key={index}>
               <ProjectCard
-                key={index}
                 title={project.title}
+                projectType={project.projectType}
+                publishedYear={project.publishedYear}
                 description={project.description}
                 technologies={project.technologies}
                 media={project.media}
@@ -62,7 +164,7 @@ Dive in to see how I turn ideas into functional, well-engineered solutions."
           ))}
         </div>
         <div className="w-full justify-center items-center flex flex-col">
-          <div className="w-2/2 border-b-1 border-secondary  mt-8 mb-8"></div>
+          <div className="w-2/2 border-b border-secondary mt-8 mb-8"></div>
           <SectionHeader
             heading={
               "Each project tells a story. More stories are being written…"

@@ -1,13 +1,17 @@
-import React, { ReactNode, MouseEventHandler } from "react";
+import React, { ButtonHTMLAttributes, ReactNode } from "react";
 
 type StripedButtonProps = {
   children: ReactNode;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-};
+  icon?: ReactNode;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function StripedButton({
   children,
-  onClick,
+  icon,
+  className = "",
+  disabled = false,
+  type = "button",
+  ...props
 }: StripedButtonProps) {
   return (
     <div className="relative inline-block group">
@@ -15,29 +19,38 @@ export default function StripedButton({
       <div
         className={`
           absolute inset-0 translate-x-1 translate-y-1 rounded-lg transition-all duration-300
-          bg-[length:12px_12px]
+          bg-size-[12px_12px]
           bg-[repeating-linear-gradient(45deg,#aadcec_0,#aadcec_2px,transparent_2px,transparent_8px)]
-          group-hover:bg-[var(--color-secondary)]
+          group-hover:bg-secondary
           group-hover:bg-none
         `}
       ></div>
 
       {/* Button */}
       <button
-        onClick={onClick}
-        className="
-          relative z-10 border-3 border-[var(--color-thirdy)] rounded-lg 
-          bg-transparent px-6 py-2 transition-all duration-300
-        "
+        type={type}
+        disabled={disabled}
+        className={`
+          relative z-10 inline-flex items-center gap-1 border-3 border-(--color-thirdy) rounded-lg 
+          bg-transparent px-4 py-1 transition-all duration-300
+          ${disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}
+          ${className}
+        `}
+        {...props}
       >
-        <p
+        <span
           className="
-            font-bold text-[var(--color-thirdy)] transition-all duration-300
+            font-bold text-(--color-thirdy) transition-all duration-300
             group-hover:[text-shadow:2px_2px_white]
           "
         >
           {children}
-        </p>
+        </span>
+        {icon ? (
+          <span className="inline-flex items-center justify-center text-(--color-thirdy)">
+            {icon}
+          </span>
+        ) : null}
       </button>
     </div>
   );

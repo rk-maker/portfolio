@@ -73,7 +73,7 @@ export default function TechSkillsSection() {
           animate={inView ? "show" : "hidden"}
           style={{ y: leftColumnY }}
         >
-          <div className="relative w-70 h-70 md:w-[350px] md:h-[350px]">
+          <div className="relative w-70 h-70 md:w-87 md:h-87">
             {/* Circle in background */}
             <motion.div
               id="rounded"
@@ -86,31 +86,34 @@ export default function TechSkillsSection() {
             <SvgComponent className="absolute w-full h-full z-10 md:-left-10 md:bottom-4" />
           </div>
         </motion.div>
+        {/* Right half: Content  */}
 
         <motion.div
           style={{ y: rightColumnY }}
-          className="w-1/2 flex items-center justify-center"
+          className="w-1/2 flex flex-col items-start justify-start"
         >
-          <SectionHeader
-            animated={false}
-            heading="Tools of the Trade"
-            description={
-              <span>
-                I work with a versatile set of technologies to build scalable,
-                efficient, and intelligent solutions. On the frontend, I use
-                React, Next.js, React Native, Tailwind CSS, and Material UI to
-                create responsive, modern, and user-friendly interfaces that
-                enhance the user experience.
-                <br />
-                <br />
-                On the backend, I leverage Node.js, Express.js, TypeScript, and
-                SQL to design robust APIs and manage data efficiently. I also
-                work with AI and machine learning frameworks, including
-                TensorFlow, PyTorch, and OpenAI APIs, to build smart,
-                data-driven applications that solve real-world problems.
-              </span>
-            }
-          />
+          <div className="w-6/7  items-start justify-end">
+            <SectionHeader
+              animated={false}
+              width="full"
+              heading="Tools of the Trade"
+              description={
+                <span>
+                  I work with a versatile set of technologies to build scalable,
+                  efficient, and intelligent solutions. On the frontend, I use
+                  React, Next.js, React Native, Tailwind CSS, and Material UI to
+                  create responsive, modern, and user-friendly interfaces that
+                  enhance the user experience.
+                  <br />
+                  On the backend, I leverage Node.js, Express.js, TypeScript,
+                  and SQL to design robust APIs and manage data efficiently. I
+                  also work with AI and machine learning frameworks, including
+                  TensorFlow, PyTorch, and OpenAI APIs, to build smart,
+                  data-driven applications that solve real-world problems.
+                </span>
+              }
+            />
+          </div>
         </motion.div>
       </div>
     </section>
