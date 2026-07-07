@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   title: "Raffay's portfolio",
   description: "Raffay khan portfolio",
   icons: {
-    icon: "/logo.png",
+    icon: [{ url: "/logo.png", type: "image/png" }],
+    shortcut: [{ url: "/logo.png", type: "image/png" }],
+    apple: [{ url: "/logo.png", type: "image/png" }],
   },
 };
 
