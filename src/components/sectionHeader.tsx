@@ -11,7 +11,8 @@ type SectionHeaderProps = {
   headingSize?: "lg" | "xl";
   descriptionSize?: "small" | "medium" | "large";
   width?: "small" | "medium" | "large" | "full";
-  animated?: boolean; // NEW: controls animation + line
+  animated?: boolean; // controls animation + line
+  animationStart?: boolean; // NEW: optional external trigger. If provided, animation starts when this becomes true, instead of on scroll-into-view.
   onAnimationComplete?: () => void;
 };
 
@@ -61,6 +62,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   headingSize = "lg",
   width = "large",
   animated = true,
+  animationStart,
   descriptionSize = "small",
   onAnimationComplete,
 }) => {
@@ -72,8 +74,12 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
     triggerOnce: true,
   });
 
+  // If animationStart prop is explicitly passed (true/false), it takes over as the trigger.
+  // Otherwise fall back to the scroll-based inView trigger (existing behavior).
+  const shouldStart = animationStart !== undefined ? animationStart : inView;
+
   useEffect(() => {
-    if (animated && inView) {
+    if (animated && shouldStart) {
       async function sequence() {
         await linePlaceControls.start("visible");
         await fadeUpControls.start("show");
@@ -85,13 +91,15 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
     }
   }, [
     animated,
-    inView,
+    shouldStart,
     linePlaceControls,
     fadeUpControls,
     onAnimationComplete,
   ]);
+
   const headingClass = `${headingSizeMap[headingSize]} font-bold`;
   const descriptionClass = `${descriptionSizeMap[descriptionSize]} font-light  text-font `;
+
   return (
     <div className={`${widthMap[width]} text-${align} `}>
       {/* Heading */}

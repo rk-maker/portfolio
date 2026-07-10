@@ -136,6 +136,7 @@ Dive in to see how I turn ideas into functional, well-engineered solutions."
             onAnimationComplete={() => {
               setPrevAnimation(true);
             }}
+            animationStart={true}
           />
         </div>
         <div className="flex justify-center  md:w-1/2">
