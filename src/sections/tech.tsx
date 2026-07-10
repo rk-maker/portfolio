@@ -73,7 +73,7 @@ export default function TechSkillsSection() {
           animate={inView ? "show" : "hidden"}
           style={{ y: leftColumnY }}
         >
-          <div className="relative w-70 h-70 md:w-87 md:h-87">
+          <div className="relative w-40 h-40 md:w-90 md:h-90">
             {/* Circle in background */}
             <motion.div
               id="rounded"

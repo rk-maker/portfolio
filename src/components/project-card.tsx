@@ -1,11 +1,14 @@
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Badge from "./badge";
 import StripedButton from "./button";
 import Image from "next/image";
-import { GoArrowRight, GoArrowUpRight } from "react-icons/go";
-import { VscChromeClose } from "react-icons/vsc";
-import { FiGithub } from "react-icons/fi";
-import { VscGithubAlt } from "react-icons/vsc";
+import {
+  GoArrowRight,
+  GoArrowUpRight,
+  GoChevronLeft,
+  GoChevronRight,
+} from "react-icons/go";
+import { VscChromeClose, VscGithubAlt } from "react-icons/vsc";
 
 interface ProjectCardProps {
   title: string;
@@ -28,29 +31,6 @@ interface ProjectCardProps {
   className?: string;
 }
 
-// const variants: Variants = {
-//   enter: (direction: number) => ({
-//     x: direction > 0 ? 120 : -120,
-//     rotate: direction > 0 ? 6 : -6,
-//     opacity: 0,
-//     scale: 0.96,
-//   }),
-//   center: {
-//     x: 0,
-//     rotate: 0,
-//     opacity: 1,
-//     scale: 1,
-//     transition: { type: "spring", stiffness: 500, damping: 40 },
-//   },
-//   exit: (direction: number) => ({
-//     x: direction > 0 ? -120 : 120,
-//     rotate: direction > 0 ? -6 : 6,
-//     opacity: 0,
-//     scale: 0.96,
-//     transition: { duration: 0.18 },
-//   }),
-// };
-
 export function ProjectCard({
   title,
   projectType,
@@ -65,12 +45,34 @@ export function ProjectCard({
   index,
 }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const isMobileApp = projectType.trim().toLowerCase() === "mobile app";
 
   const photos = useMemo(
     () => (Array.isArray(media.src) ? media.src : [media.src]),
     [media.src],
   );
+
+  useEffect(() => {
+    setCurrentPhotoIndex(0);
+  }, [photos]);
+
+  const showPhoto = photos[currentPhotoIndex] || photos[0];
+  const hasMultiplePhotos = photos.length > 1;
+
+  const handlePrev = () => {
+    if (!hasMultiplePhotos) return;
+    setCurrentPhotoIndex((current) =>
+      current === 0 ? photos.length - 1 : current - 1,
+    );
+  };
+
+  const handleNext = () => {
+    if (!hasMultiplePhotos) return;
+    setCurrentPhotoIndex((current) =>
+      current === photos.length - 1 ? 0 : current + 1,
+    );
+  };
 
   return (
     <div className={`py-16 ${className}`}>
@@ -84,30 +86,44 @@ export function ProjectCard({
           >
             <div className="flex items-center justify-center">
               {isMobileApp ? (
-                <div className="w-full overflow-x-auto rounded-2xl   bg-secondary/10 shadow-sm">
-                  <div className="flex snap-x snap-mandatory gap-2 px-4 py-4">
-                    {photos.map((photo, photoIndex) => (
-                      <div
-                        key={photoIndex}
-                        className="w-40 sm:w-50 shrink-0 snap-center overflow-hidden rounded-3xl"
-                      >
-                        <div className="relative h-80 w-50">
-                          <Image
-                            src={photo || "/placeholder.svg"}
-                            alt={
-                              media.alt || `${title} - Image ${photoIndex + 1}`
-                            }
-                            fill
-                            className="object-contain"
-                            sizes="(max-width: 768px) 100vw, 260px"
-                          />
-                        </div>
-                      </div>
-                    ))}
+                <div className="relative w-full overflow-hidden rounded-2xl bg-secondary/10 shadow-sm border  border-secondary/50">
+                  <div className="relative aspect-5/3 w-full">
+                    <Image
+                      src={showPhoto || "/placeholder.svg"}
+                      alt={
+                        media.alt || `${title} - Image ${currentPhotoIndex + 1}`
+                      }
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 100vw, 640px"
+                    />
                   </div>
+
+                  {hasMultiplePhotos && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={handlePrev}
+                        className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full   hover:bg-secondary px-2 py-2 text-3xl  text-font  transition"
+                      >
+                        <GoChevronLeft className="text-thirdy size-7 " />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleNext}
+                        className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full   hover:bg-secondary px-2 py-2 text-3xl  text-font  transition"
+                      >
+                        <GoChevronRight className="text-thirdy size-7" />
+                      </button>
+
+                      <div className="absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-xs text-white">
+                        {currentPhotoIndex + 1} / {photos.length}
+                      </div>
+                    </>
+                  )}
                 </div>
               ) : (
-                <div className="w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm">
+                <div className="w-full h-50 sm:h-80 overflow-hidden rounded-2xl bg-slate-50 shadow-sm border border-secondary/50">
                   <div className="relative aspect-5/3 w-full">
                     <Image
                       src={photos[0] || "/placeholder.svg"}
@@ -132,7 +148,7 @@ export function ProjectCard({
                 <p className="text-sm md:text-base uppercase tracking-[0.3em] text-secondary mb-3">
                   {projectType} / {publishedYear}
                 </p>
-                <h3 className="text-4xl md:text-5xl font-bold text-font mb-4">
+                <h3 className="text-xl md:text-5xl font-bold text-font mb-4">
                   {title}
                 </h3>
               </div>
@@ -143,7 +159,7 @@ export function ProjectCard({
                 ))}
               </div>
 
-              <p className="text-font leading-relaxed font-light text-lg">
+              <p className="text-font leading-relaxed font-light text-sm md:text-lg">
                 {description}
               </p>
 
@@ -176,7 +192,7 @@ export function ProjectCard({
             </div>
           </div>
         </div>
-
+        {/* modal starts here  */}
         {isModalOpen && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-thirdy/2 backdrop-blur-sm px-4 py-4 sm:py-6"
@@ -199,31 +215,48 @@ export function ProjectCard({
                   <p className="text-sm uppercase tracking-[0.35em] text-secondary">
                     {projectType} / {publishedYear}
                   </p>
-                  <h2 className="mt-3 text-3xl font-bold text-font">{title}</h2>
+                  <h2 className="mt-3 text-xl md:text-3xl font-bold text-font">
+                    {title}
+                  </h2>
                 </div>
                 <div className="grid flex-1 min-h-0 grid-cols-1 overflow-hidden md:grid-cols-[1.4fr_0.8fr]">
                   <div className="overflow-y-auto px-6 py-6 pb-10">
                     {isMobileApp ? (
-                      <div className="flex h-80 gap-2 overflow-x-auto snap-x snap-mandatory rounded-3xl">
-                        {photos.map((photo, photoIndex) => (
-                          <div
-                            key={photoIndex}
-                            className="w-40 sm:w-50 shrink-0 snap-center overflow-hidden rounded-3xl"
-                          >
-                            <div className="relative h-80 w-50">
-                              <Image
-                                src={photo || "/placeholder.svg"}
-                                alt={
-                                  media.alt ||
-                                  `${title} - Image ${photoIndex + 1}`
-                                }
-                                fill
-                                className="object-contain"
-                                sizes="(max-width: 768px) 100vw, 900px"
-                              />
+                      <div className="relative h-80 overflow-hidden rounded-3xl bg-slate-100">
+                        <div className="relative h-full w-full">
+                          <Image
+                            src={showPhoto || "/placeholder.svg"}
+                            alt={
+                              media.alt ||
+                              `${title} - Image ${currentPhotoIndex + 1}`
+                            }
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 768px) 100vw, 900px"
+                          />
+                        </div>
+
+                        {hasMultiplePhotos && (
+                          <>
+                            <button
+                              type="button"
+                              onClick={handlePrev}
+                              className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full   hover:bg-secondary px-2 py-2 text-3xl  text-font  transition"
+                            >
+                              <GoChevronLeft className="text-thirdy size-7 " />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={handleNext}
+                              className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full   hover:bg-secondary px-2 py-2 text-3xl  text-font  transition"
+                            >
+                              <GoChevronRight className="text-thirdy size-7" />
+                            </button>
+                            <div className="absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-xs text-white">
+                              {currentPhotoIndex + 1} / {photos.length}
                             </div>
-                          </div>
-                        ))}
+                          </>
+                        )}
                       </div>
                     ) : (
                       <div className="relative h-80 overflow-hidden rounded-4xl bg-slate-100">
@@ -238,17 +271,17 @@ export function ProjectCard({
                     )}
 
                     <div className="mt-6">
-                      <h3 className="text-2xl font-semibold text-font mb-3">
+                      <h3 className="text-lg md:text-2xl font-semibold text-font mb-3">
                         Description
                       </h3>
-                      <p className="whitespace-pre-line text-font leading-relaxed text-base font-light">
+                      <p className="whitespace-pre-line text-font leading-relaxed text-sm md:text-lg font-light">
                         {detailedDescription || description}
                       </p>
                     </div>
                   </div>
                   <div className="overflow-y-auto border-t border-slate-200 px-6 py-6 pb-10 md:border-t-0 md:border-l">
                     <div className="mb-8">
-                      <h3 className="text-2xl font-semibold text-font mb-4">
+                      <h3 className="text-lg md:text-2xl font-semibold text-font mb-4">
                         Tech Stack
                       </h3>
                       <div className="flex flex-wrap gap-3">
@@ -260,7 +293,7 @@ export function ProjectCard({
 
                     {links && (links.live || links.github || links.demo) && (
                       <div className="mb-8">
-                        <h3 className="text-2xl font-semibold text-font mb-4">
+                        <h3 className="text-lg md:text-2xl font-semibold text-font mb-4">
                           Project Links
                         </h3>
                         <div className="flex flex-wrap gap-3">
@@ -302,14 +335,14 @@ export function ProjectCard({
 
                     {features && features.length > 0 && (
                       <div>
-                        <h3 className="text-2xl font-semibold text-font mb-4">
+                        <h3 className="text-lg md:text-2xl font-semibold text-font mb-4">
                           Key Features
                         </h3>
                         <ul className="space-y-3">
                           {features.map((feature, featureIndex) => (
                             <li
                               key={featureIndex}
-                              className="text-font flex items-start text-base font-light"
+                              className="text-font flex items-start text-sm md:text-lg font-light"
                             >
                               <span className="w-2 h-2 rounded-full bg-thirdy  font-light mt-2 mr-4 shrink-0"></span>
                               {feature}
