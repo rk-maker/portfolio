@@ -147,7 +147,7 @@ export default function ProjectsSection() {
                   y: springY,
                 }}
               />
-              <ComputerSVG className="absolute -bottom-9 -right-20 top- h-auto z-10" />
+              <ComputerSVG className="absolute  -bottom-4 -right-4 md:-bottom-9 md:-right-20 md:top-h-auto z-10" />
             </div>
           </motion.div>
         </motion.div>
