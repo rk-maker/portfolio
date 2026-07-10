@@ -32,7 +32,8 @@ export default function StripedButton({
         disabled={disabled}
         className={`
           relative z-10 inline-flex items-center gap-1 border-3 border-(--color-thirdy) rounded-lg 
-          bg-transparent px-4 py-1 transition-all duration-300
+          bg-transparent px-3 py-0.5 text-sm transition-all duration-300
+          sm:px-4 sm:py-1 sm:text-base
           ${disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}
           ${className}
         `}

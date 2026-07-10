@@ -123,7 +123,7 @@ export default function ProjectsSection() {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
 
-        <div className="md:pt-33 md:px-7">
+        <div className=" pt-20 md:pt-33  px-5 md:px-7">
           <SectionHeader
             heading="Featured Projects"
             description="Explore my curated projects, each crafted with a focus on real-world impact and technical excellence.
@@ -138,7 +138,7 @@ Dive in to see how I turn ideas into functional, well-engineered solutions."
             }}
           />
         </div>
-        <div className="flex justify-center  w-1/2">
+        <div className="flex justify-center  md:w-1/2">
           <div className="md:mr-25 md:mt-9">
             <ScrollIndicator animate={startScrollAnimate} />
           </div>

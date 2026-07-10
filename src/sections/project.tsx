@@ -137,7 +137,7 @@ export default function ProjectsSection() {
             initial="hidden"
             animate={inView ? "show" : "hidden"}
           >
-            <div className="relative w-70 h-70 md:w-100 md:h-100">
+            <div className="relative w-40 h-40 md:w-100 md:h-100">
               {/* Circle in background */}
               <motion.div
                 id="rounded"

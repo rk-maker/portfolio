@@ -246,7 +246,7 @@ export default function AboutSection() {
           <SectionHeader
             animated={false}
             heading="Meet the Maker"
-            description="Full-stack developer passionate about clean code, smart solutions, and continuous learning. Always curious, always improving."
+            description={`Full-stack developer passionate about clean code, smart solutions, and continuous learning. Always curious, always improving.`}
           />
         </div>
         <div className="flex  mt-8">
@@ -260,7 +260,7 @@ export default function AboutSection() {
                 href={isEmail ? `mailto:${icon.url}` : icon.url}
                 target={isEmail ? undefined : "_blank"} // add this line
                 rel={isEmail ? undefined : "noopener noreferrer"}
-                className="mr-15 text-xl text-font hover:text-thirdy transition-colors duration-300"
+                className="mr-15 text-md md:text-xl text-font hover:text-thirdy transition-colors duration-300"
                 custom={i}
                 variants={socialVariants}
                 initial="hidden"
@@ -273,7 +273,7 @@ export default function AboutSection() {
         </div>
         {/* INfo Details */}
         <div className="mt-8 sm:flex-row">
-          <div className="flex flex-col gap-20 text-center sm:flex-row sm:text-left">
+          <div className="flex flex-col gap-8 text-center sm:flex-row sm:text-left">
             <motion.div
               custom={2}
               variants={aboutElementsAnimation}
@@ -314,14 +314,14 @@ export default function AboutSection() {
             variants={aboutElementsAnimation}
             initial="hidden"
             animate={aboutElementsAnimationControls}
-            className="mt-8 sm:mt-6"
+            className="mt-8 sm:mt-6 flex justify-center sm:justify-start"
           >
             <StripedButton onClick={handleOpenModal}>
               Request resume
             </StripedButton>
           </motion.div>
         </div>
-
+        {/* Modal starts here    */}
         {isModalOpen ? (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-thirdy/2 px-4 py-6"

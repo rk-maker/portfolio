@@ -15,7 +15,7 @@ const Navbar = () => {
   };
   return (
     <nav
-      className="fixed z-10 flex items-center justify-between left-0 right-0 mx-auto px-10 py-8"
+      className="fixed z-10 flex items-center justify-between left-0 right-0 mx-auto md:px-10  px-6 py-8"
       style={{ width: "calc(100% - 40px)" }}
     >
       <div className="flex">
@@ -30,7 +30,7 @@ const Navbar = () => {
           <Image
             src={"/logo.png"}
             alt="my-image"
-            className="w-15 h-15"
+            className="md:w-15 md:h-15 w-10 h-10 cursor-pointer"
             width={60}
             height={60}
           />

@@ -17,7 +17,7 @@ type SectionHeaderProps = {
 
 const headingSizeMap = {
   lg: "text-xl md:text-5xl",
-  xl: "text-2xl md:text-8xl",
+  xl: "text-3xl md:text-8xl",
 };
 
 const descriptionSizeMap = {

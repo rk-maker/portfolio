@@ -132,7 +132,7 @@ export function ProjectCard({
                 <p className="text-sm md:text-base uppercase tracking-[0.3em] text-secondary mb-3">
                   {projectType} / {publishedYear}
                 </p>
-                <h3 className="text-4xl md:text-5xl font-bold text-font mb-4">
+                <h3 className="text-xl md:text-5xl font-bold text-font mb-4">
                   {title}
                 </h3>
               </div>
@@ -143,7 +143,7 @@ export function ProjectCard({
                 ))}
               </div>
 
-              <p className="text-font leading-relaxed font-light text-lg">
+              <p className="text-font leading-relaxed font-light text-sm md:text-lg">
                 {description}
               </p>
 
@@ -176,7 +176,7 @@ export function ProjectCard({
             </div>
           </div>
         </div>
-
+        {/* modal starts here  */}
         {isModalOpen && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-thirdy/2 backdrop-blur-sm px-4 py-4 sm:py-6"
@@ -199,7 +199,9 @@ export function ProjectCard({
                   <p className="text-sm uppercase tracking-[0.35em] text-secondary">
                     {projectType} / {publishedYear}
                   </p>
-                  <h2 className="mt-3 text-3xl font-bold text-font">{title}</h2>
+                  <h2 className="mt-3 text-xl md:text-3xl font-bold text-font">
+                    {title}
+                  </h2>
                 </div>
                 <div className="grid flex-1 min-h-0 grid-cols-1 overflow-hidden md:grid-cols-[1.4fr_0.8fr]">
                   <div className="overflow-y-auto px-6 py-6 pb-10">
@@ -238,17 +240,17 @@ export function ProjectCard({
                     )}
 
                     <div className="mt-6">
-                      <h3 className="text-2xl font-semibold text-font mb-3">
+                      <h3 className="text-lg md:text-2xl font-semibold text-font mb-3">
                         Description
                       </h3>
-                      <p className="whitespace-pre-line text-font leading-relaxed text-base font-light">
+                      <p className="whitespace-pre-line text-font leading-relaxed text-sm md:text-lg font-light">
                         {detailedDescription || description}
                       </p>
                     </div>
                   </div>
                   <div className="overflow-y-auto border-t border-slate-200 px-6 py-6 pb-10 md:border-t-0 md:border-l">
                     <div className="mb-8">
-                      <h3 className="text-2xl font-semibold text-font mb-4">
+                      <h3 className="text-lg md:text-2xl font-semibold text-font mb-4">
                         Tech Stack
                       </h3>
                       <div className="flex flex-wrap gap-3">
@@ -260,7 +262,7 @@ export function ProjectCard({
 
                     {links && (links.live || links.github || links.demo) && (
                       <div className="mb-8">
-                        <h3 className="text-2xl font-semibold text-font mb-4">
+                        <h3 className="text-lg md:text-2xl font-semibold text-font mb-4">
                           Project Links
                         </h3>
                         <div className="flex flex-wrap gap-3">
@@ -302,14 +304,14 @@ export function ProjectCard({
 
                     {features && features.length > 0 && (
                       <div>
-                        <h3 className="text-2xl font-semibold text-font mb-4">
+                        <h3 className="text-lg md:text-2xl font-semibold text-font mb-4">
                           Key Features
                         </h3>
                         <ul className="space-y-3">
                           {features.map((feature, featureIndex) => (
                             <li
                               key={featureIndex}
-                              className="text-font flex items-start text-base font-light"
+                              className="text-font flex items-start text-sm md:text-lg font-light"
                             >
                               <span className="w-2 h-2 rounded-full bg-thirdy  font-light mt-2 mr-4 shrink-0"></span>
                               {feature}
